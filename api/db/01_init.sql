@@ -49,23 +49,10 @@ CREATE TABLE task_categories_xref (
 CREATE TABLE player_tasks (
     player_id UUID NOT NULL REFERENCES players (id),
     task_id UUID NOT NULL REFERENCES tasks (id),
-    session INT NOT NULL,
+    session_assigned INT NOT NULL,
     time_assigned TIMESTAMP NOT NULL,
-    PRIMARY KEY (player_id, task_id)
-);
-
-CREATE TABLE player_tasks_completed (
-    player_id UUID NOT NULL REFERENCES players (id),
-    task_id UUID NOT NULL REFERENCES tasks (id),
-    session INT NOT NULL,
-    time_completed TIMESTAMP NOT NULL,
-    PRIMARY KEY (player_id, task_id)
-);
-
-CREATE TABLE player_tasks_failed (
-    player_id UUID NOT NULL REFERENCES players (id),
-    task_id UUID NOT NULL REFERENCES tasks (id),
-    session INT NOT NULL,
-    time_failed TIMESTAMP NOT NULL,
+    session_resolved INT,
+    time_resolved TIMESTAMP,
+    status VARCHAR(255) NOT NULL CHECK status IN ('assigned', 'failed', 'completed'),
     PRIMARY KEY (player_id, task_id)
 );
