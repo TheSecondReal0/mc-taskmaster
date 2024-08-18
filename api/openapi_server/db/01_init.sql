@@ -1,6 +1,7 @@
 CREATE TABLE players (
     id UUID PRIMARY KEY,
-    discord_id BIGINT NOT NULL
+    discord_id BIGINT NOT NULL,
+    score BIGINT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE categories (
@@ -18,17 +19,11 @@ CREATE TABLE player_categories_xref (
 -- should only ever have 1 row, to keep track of current session etc.
 CREATE TABLE season (
     session INT NOT NULL,
-    start TIMESTAMP,
-    end TIMESTAMP
+    start_time TIMESTAMP,
+    end_time TIMESTAMP
 );
 
 INSERT INTO season (session) VALUES (0);
-
-CREATE TABLE player_season_xref (
-    player_id UUID NOT NULL REFERENCES players (id),
-    season INT NOT NULL REFERENCES season(id),
-    score BIGINT
-)
 
 CREATE TABLE tasks (
     id UUID PRIMARY KEY,
@@ -36,7 +31,8 @@ CREATE TABLE tasks (
     description TEXT NOT NULL,
     points INT,
     min_session INT,
-    max_session INT
+    max_session INT,
+    enabled BOOLEAN NOT NULL DEFAULT true
 );
 
 CREATE TABLE task_categories_xref (
@@ -52,6 +48,6 @@ CREATE TABLE player_tasks_xref (
     time_assigned TIMESTAMP NOT NULL,
     session_resolved INT,
     time_resolved TIMESTAMP,
-    status VARCHAR(255) NOT NULL CHECK status IN ('assigned', 'failed', 'completed'),
+    status VARCHAR(255) NOT NULL CHECK (status IN ('assigned', 'failed', 'completed')),
     PRIMARY KEY (player_id, task_id, session_assigned)
 );
