@@ -18,7 +18,8 @@ flask_install:
     just flask ../api
 
 flask target: _setup
-    npx @openapitools/openapi-generator-cli generate -i openapi.yml -g python-flask -o {{target}}
+    npx @openapitools/openapi-generator-cli generate -i openapi.yml -g python-flask -o {{target}} \
+        --additional-properties=serverPort=1122
 
 _setup:
     npm install @openapitools/openapi-generator-cli

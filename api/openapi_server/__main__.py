@@ -12,7 +12,7 @@ def main():
                 arguments={'title': 'MC Taskmaster'},
                 pythonic_params=True)
 
-    app.run(port=8080)
+    app.run(port=1122)
 
 
 if __name__ == '__main__':
