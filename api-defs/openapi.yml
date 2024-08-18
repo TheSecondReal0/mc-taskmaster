@@ -26,6 +26,30 @@ paths:
                   - tasks
                   - count
 
+#### WEB
+# get specific task
+# add task
+# edit task
+# delete task
+
+# add category
+# update category
+# delete category
+
+# add task to category (PUT /tasks/{taskId}/categories/{categoryId} ?)
+# remove task from category
+
+#### DISCORD BOT
+# all tasks should be returned in the order they were assigned
+# /player/{playerId}/tasks GET
+# /player/{playerId}/tasks/assign (assign tasks to player)
+# /player/{playerId}/tasks/reroll (assign tasks to player)
+# /player/{playerId}/tasks/{taskId OR idx in time_assigned order}/fail POST
+# /player/{playerId}/tasks/{taskId OR idx in time_assigned order}/complete POST
+
+# /player/{playerId}/categories/{categoryId} PUT
+# /player/{playerId}/categories/{categoryId} DEL
+
 components:
   schemas:
     Category:
