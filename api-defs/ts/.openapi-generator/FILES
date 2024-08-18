@@ -1,0 +1,8 @@
+apis/DefaultApi.ts
+apis/index.ts
+index.ts
+models/Category.ts
+models/GetTasks200Response.ts
+models/Task.ts
+models/index.ts
+runtime.ts
