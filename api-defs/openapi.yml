@@ -78,6 +78,8 @@ components:
           type: integer
         max_session:
           type: integer
+        enabled:
+          type: boolean
         categories:
           type: array
           items:

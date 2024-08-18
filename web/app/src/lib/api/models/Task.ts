@@ -64,6 +64,12 @@ export interface Task {
     maxSession?: number;
     /**
      * 
+     * @type {boolean}
+     * @memberof Task
+     */
+    enabled?: boolean;
+    /**
+     * 
      * @type {Array<Category>}
      * @memberof Task
      */
@@ -98,6 +104,7 @@ export function TaskFromJSONTyped(json: any, ignoreDiscriminator: boolean): Task
         'points': json['points'],
         'minSession': json['min_session'] == null ? undefined : json['min_session'],
         'maxSession': json['max_session'] == null ? undefined : json['max_session'],
+        'enabled': json['enabled'] == null ? undefined : json['enabled'],
         'categories': ((json['categories'] as Array<any>).map(CategoryFromJSON)),
     };
 }
@@ -114,6 +121,7 @@ export function TaskToJSON(value?: Task | null): any {
         'points': value['points'],
         'min_session': value['minSession'],
         'max_session': value['maxSession'],
+        'enabled': value['enabled'],
         'categories': ((value['categories'] as Array<any>).map(CategoryToJSON)),
     };
 }

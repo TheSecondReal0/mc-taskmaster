@@ -42,6 +42,7 @@ components:
         - name: name
           id: id
         min_session: 6
+        enabled: true
         points: 0
       properties:
         id:
@@ -62,6 +63,9 @@ components:
         max_session:
           title: max_session
           type: integer
+        enabled:
+          title: enabled
+          type: boolean
         categories:
           items:
             $ref: '#/components/schemas/Category'
@@ -89,6 +93,7 @@ components:
           - name: name
             id: id
           min_session: 6
+          enabled: true
           points: 0
         - max_session: 1
           name: name
@@ -100,6 +105,7 @@ components:
           - name: name
             id: id
           min_session: 6
+          enabled: true
           points: 0
       properties:
         tasks:

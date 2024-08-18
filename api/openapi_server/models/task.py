@@ -14,7 +14,7 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, description=None, points=None, min_session=None, max_session=None, categories=None):  # noqa: E501
+    def __init__(self, id=None, name=None, description=None, points=None, min_session=None, max_session=None, enabled=None, categories=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param id: The id of this Task.  # noqa: E501
@@ -29,6 +29,8 @@ class Task(Model):
         :type min_session: int
         :param max_session: The max_session of this Task.  # noqa: E501
         :type max_session: int
+        :param enabled: The enabled of this Task.  # noqa: E501
+        :type enabled: bool
         :param categories: The categories of this Task.  # noqa: E501
         :type categories: List[Category]
         """
@@ -39,6 +41,7 @@ class Task(Model):
             'points': int,
             'min_session': int,
             'max_session': int,
+            'enabled': bool,
             'categories': List[Category]
         }
 
@@ -49,6 +52,7 @@ class Task(Model):
             'points': 'points',
             'min_session': 'min_session',
             'max_session': 'max_session',
+            'enabled': 'enabled',
             'categories': 'categories'
         }
 
@@ -58,6 +62,7 @@ class Task(Model):
         self._points = points
         self._min_session = min_session
         self._max_session = max_session
+        self._enabled = enabled
         self._categories = categories
 
     @classmethod
@@ -204,6 +209,27 @@ class Task(Model):
         """
 
         self._max_session = max_session
+
+    @property
+    def enabled(self) -> bool:
+        """Gets the enabled of this Task.
+
+
+        :return: The enabled of this Task.
+        :rtype: bool
+        """
+        return self._enabled
+
+    @enabled.setter
+    def enabled(self, enabled: bool):
+        """Sets the enabled of this Task.
+
+
+        :param enabled: The enabled of this Task.
+        :type enabled: bool
+        """
+
+        self._enabled = enabled
 
     @property
     def categories(self) -> List[Category]:
