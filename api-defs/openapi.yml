@@ -40,6 +40,7 @@ paths:
 # remove task from category
 
 #### DISCORD BOT
+# look at current discord bot for what we need to support
 # all tasks should be returned in the order they were assigned
 # /player/{playerId}/tasks GET
 # /player/{playerId}/tasks/assign (assign tasks to player)
@@ -49,6 +50,10 @@ paths:
 
 # /player/{playerId}/categories/{categoryId} PUT
 # /player/{playerId}/categories/{categoryId} DEL
+
+#### MANAGEMENT
+# /session/start POST
+# /session/end POST
 
 components:
   schemas:

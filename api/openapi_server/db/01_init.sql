@@ -15,12 +15,14 @@ CREATE TABLE player_categories_xref (
     PRIMARY KEY (player_id, category_id)
 );
 
+-- should only ever have 1 row, to keep track of current session etc.
 CREATE TABLE season (
-    name TEXT NOT NULL,
     session INT NOT NULL,
     start TIMESTAMP,
     end TIMESTAMP
 );
+
+INSERT INTO season (session) VALUES (0);
 
 CREATE TABLE player_season_xref (
     player_id UUID NOT NULL REFERENCES players (id),
