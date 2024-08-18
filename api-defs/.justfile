@@ -9,7 +9,12 @@ typescript: _setup
     # npm i -D openapi-typescript typescript
     # npx openapi-typescript openapi.yml -o ts/v1.d.ts
 
+<<<<<<< Updated upstream
     npx @openapitools/openapi-generator-cli generate -i openapi.yml -g typescript-fetch -o ./ts
+=======
+    npm install @openapitools/openapi-generator-cli
+    npx @openapitools/openapi-generator-cli generate -i openapi.yml -g typescript-fetch -o ./../web/app/src/lib/api
+>>>>>>> Stashed changes
 
 fastapi: _setup
     npx @openapitools/openapi-generator-cli generate -i openapi.yml -g python-fastapi -o ./fastapi
