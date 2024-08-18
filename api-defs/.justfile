@@ -14,6 +14,8 @@ typescript: _setup
 fastapi: _setup
     npx @openapitools/openapi-generator-cli generate -i openapi.yml -g python-fastapi -o ./fastapi
 
+flask: _setup
+    npx @openapitools/openapi-generator-cli generate -i openapi.yml -g python-flask -o ./flask
 
 _setup:
     npm install @openapitools/openapi-generator-cli
