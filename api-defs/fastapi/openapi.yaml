@@ -1,0 +1,116 @@
+openapi: 3.0.3
+info:
+  title: MC Taskmaster
+  version: "1.0"
+servers:
+- url: http://taskmaster.jazure.net
+paths:
+  /tasks:
+    get:
+      operationId: get_tasks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_tasks_200_response'
+          description: OK
+components:
+  schemas:
+    Category:
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          title: id
+          type: string
+        name:
+          title: name
+          type: string
+      title: Category
+    Task:
+      example:
+        max_session: 1
+        name: name
+        description: description
+        id: id
+        categories:
+        - name: name
+          id: id
+        - name: name
+          id: id
+        min_session: 6
+        points: 0
+      properties:
+        id:
+          title: id
+          type: string
+        name:
+          title: name
+          type: string
+        description:
+          title: description
+          type: string
+        points:
+          title: points
+          type: integer
+        min_session:
+          title: min_session
+          type: integer
+        max_session:
+          title: max_session
+          type: integer
+        categories:
+          items:
+            $ref: '#/components/schemas/Category'
+          title: categories
+          type: array
+      required:
+      - categories
+      - description
+      - id
+      - name
+      - points
+      title: Task
+      type: object
+    get_tasks_200_response:
+      example:
+        count: 5
+        tasks:
+        - max_session: 1
+          name: name
+          description: description
+          id: id
+          categories:
+          - name: name
+            id: id
+          - name: name
+            id: id
+          min_session: 6
+          points: 0
+        - max_session: 1
+          name: name
+          description: description
+          id: id
+          categories:
+          - name: name
+            id: id
+          - name: name
+            id: id
+          min_session: 6
+          points: 0
+      properties:
+        tasks:
+          items:
+            $ref: '#/components/schemas/Task'
+          title: tasks
+          type: array
+        count:
+          title: count
+          type: integer
+      required:
+      - count
+      - tasks
+      title: get_tasks_200_response
+      type: object

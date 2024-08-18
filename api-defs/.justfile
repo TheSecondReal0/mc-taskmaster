@@ -1,4 +1,4 @@
-typescript:
+typescript: _setup
     # npm i @hey-api
     # npm i -D openapi-typescript typescript
     # npx openapi-typescript openapi.yml -o ts/v1.d.ts
@@ -9,7 +9,11 @@ typescript:
     # npm i -D openapi-typescript typescript
     # npx openapi-typescript openapi.yml -o ts/v1.d.ts
 
-    npm install @openapitools/openapi-generator-cli
     npx @openapitools/openapi-generator-cli generate -i openapi.yml -g typescript-fetch -o ./ts
 
+fastapi: _setup
+    npx @openapitools/openapi-generator-cli generate -i openapi.yml -g python-fastapi -o ./fastapi
 
+
+_setup:
+    npm install @openapitools/openapi-generator-cli
