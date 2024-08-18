@@ -15,29 +15,26 @@ CREATE TABLE player_categories_xref (
     PRIMARY KEY (player_id, category_id)
 );
 
-CREATE TABLE seasons (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE season (
     name TEXT NOT NULL,
     session INT NOT NULL,
     start TIMESTAMP,
     end TIMESTAMP
 );
 
-CREATE TABLE player_season (
+CREATE TABLE player_season_xref (
     player_id UUID NOT NULL REFERENCES players (id),
     season INT NOT NULL REFERENCES season(id),
     score BIGINT
 )
 
 CREATE TABLE tasks (
-    id UUID NOT NULL,
-    season INT NOT NULL REFERENCES seasons (id),
+    id UUID PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL, -- unique name of the task, necessary?
     description TEXT NOT NULL,
     points INT,
     min_session INT,
-    max_session INT,
-    PRIMARY KEY (id, season)
+    max_session INT
 );
 
 CREATE TABLE task_categories_xref (
@@ -46,7 +43,7 @@ CREATE TABLE task_categories_xref (
     PRIMARY KEY (task_id, category_id)
 );
 
-CREATE TABLE player_tasks (
+CREATE TABLE player_tasks_xref (
     player_id UUID NOT NULL REFERENCES players (id),
     task_id UUID NOT NULL REFERENCES tasks (id),
     session_assigned INT NOT NULL,
@@ -54,5 +51,5 @@ CREATE TABLE player_tasks (
     session_resolved INT,
     time_resolved TIMESTAMP,
     status VARCHAR(255) NOT NULL CHECK status IN ('assigned', 'failed', 'completed'),
-    PRIMARY KEY (player_id, task_id)
+    PRIMARY KEY (player_id, task_id, session_assigned)
 );

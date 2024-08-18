@@ -1,0 +1,61 @@
+openapi: '3.0.3'
+info:
+  title: MC Taskmaster
+  version: '1.0'
+servers:
+  - url: http://taskmaster.jazure.net
+paths:
+  /tasks:
+    get:
+      operationId: get_tasks
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+                  count:
+                    type: integer
+                required:
+                  - tasks
+                  - count
+
+components:
+  schemas:
+    Category:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        points:
+          type: integer
+        min_session:
+          type: integer
+        max_session:
+          type: integer
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+      required:
+        - id
+        - name
+        - description
+        - points
+        - categories
