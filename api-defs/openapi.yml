@@ -3,7 +3,7 @@ info:
   title: MC Taskmaster
   version: '1.0'
 servers:
-  - url: http://taskmaster.jazure.net
+  - url: http://api.task.jazure.net
 paths:
   /tasks:
     get:
