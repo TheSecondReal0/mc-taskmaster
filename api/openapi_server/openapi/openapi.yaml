@@ -34,7 +34,7 @@ paths:
           description: Task created successfully
       x-openapi-router-controller: openapi_server.controllers.default_controller
   /tasks/{task_id}:
-    patch:
+    put:
       operationId: update_task
       parameters:
       - explode: false

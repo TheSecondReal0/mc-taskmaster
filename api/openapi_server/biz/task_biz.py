@@ -38,9 +38,18 @@ def create_task(create_task_request: CreateTaskRequest) -> Task:
     db.session.add(to_insert)
     db.session.commit()
 
-    ret = map_db_task_to_task(to_insert)
-    print(ret)
-    return ret
+    return map_db_task_to_task(to_insert)
+
+def update_task(task_id, create_task_request: CreateTaskRequest) -> Task:
+    to_update = models.Task.query.get(task_id)
+    to_update.description = create_task_request.description
+    to_update.points = create_task_request.points
+    to_update.min_session = create_task_request.min_session
+    to_update.max_session = create_task_request.max_session
+
+    db.session.commit()
+
+    return map_db_task_to_task(to_update)
 
 def map_db_task_to_task(db_task: models.Task) -> Task:
     return Task(

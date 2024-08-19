@@ -54,7 +54,7 @@ paths:
                 $ref: '#/components/schemas/Task'
           description: Task created successfully
   /tasks/{task_id}:
-    patch:
+    put:
       operationId: update_task
       parameters:
         - name: task_id

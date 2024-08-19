@@ -51,4 +51,4 @@ def update_task(task_id):  # noqa: E501
     """
     if connexion.request.is_json:
         create_task_request = CreateTaskRequest.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return task_biz.update_task(task_id, create_task_request)
