@@ -3,10 +3,27 @@ from typing import Dict
 from typing import Tuple
 from typing import Union
 
+from openapi_server.models.create_task_request import CreateTaskRequest  # noqa: E501
 from openapi_server.models.get_tasks200_response import GetTasks200Response  # noqa: E501
+from openapi_server.models.task import Task  # noqa: E501
 from openapi_server import util
 
 from ..biz import task_biz
+
+
+def create_task(create_task_request):  # noqa: E501
+    """create_task
+
+     # noqa: E501
+
+    :param create_task_request: Create a new task
+    :type create_task_request: dict | bytes
+
+    :rtype: Union[Task, Tuple[Task, int], Tuple[Task, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_task_request = CreateTaskRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
 
 
 def get_tasks():  # noqa: E501

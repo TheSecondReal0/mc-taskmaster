@@ -14,13 +14,11 @@ class Task(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None, description=None, points=None, min_session=None, max_session=None, enabled=None, categories=None):  # noqa: E501
+    def __init__(self, id=None, description=None, points=None, min_session=None, max_session=None, enabled=None, categories=None):  # noqa: E501
         """Task - a model defined in OpenAPI
 
         :param id: The id of this Task.  # noqa: E501
         :type id: str
-        :param name: The name of this Task.  # noqa: E501
-        :type name: str
         :param description: The description of this Task.  # noqa: E501
         :type description: str
         :param points: The points of this Task.  # noqa: E501
@@ -36,7 +34,6 @@ class Task(Model):
         """
         self.openapi_types = {
             'id': str,
-            'name': str,
             'description': str,
             'points': int,
             'min_session': int,
@@ -47,7 +44,6 @@ class Task(Model):
 
         self.attribute_map = {
             'id': 'id',
-            'name': 'name',
             'description': 'description',
             'points': 'points',
             'min_session': 'min_session',
@@ -57,7 +53,6 @@ class Task(Model):
         }
 
         self._id = id
-        self._name = name
         self._description = description
         self._points = points
         self._min_session = min_session
@@ -98,29 +93,6 @@ class Task(Model):
             raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
         self._id = id
-
-    @property
-    def name(self) -> str:
-        """Gets the name of this Task.
-
-
-        :return: The name of this Task.
-        :rtype: str
-        """
-        return self._name
-
-    @name.setter
-    def name(self, name: str):
-        """Sets the name of this Task.
-
-
-        :param name: The name of this Task.
-        :type name: str
-        """
-        if name is None:
-            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
-
-        self._name = name
 
     @property
     def description(self) -> str:

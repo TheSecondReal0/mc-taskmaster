@@ -25,6 +25,39 @@ paths:
                 required:
                   - tasks
                   - count
+    post:
+      operationId: create_task
+      requestBody:
+        description: Create a new task
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                points:
+                  type: integer
+                min_session:
+                  type: integer
+                max_session:
+                  type: integer
+                categories:
+                  type: array
+                  items:
+                    type: string
+              required:
+                - name
+                - description
+                - points
+      responses:
+        '200':
+          description: Task created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
 
 #### WEB
 # get specific task
@@ -67,8 +100,6 @@ components:
       type: object
       properties:
         id:
-          type: string
-        name:
           type: string
         description:
           type: string

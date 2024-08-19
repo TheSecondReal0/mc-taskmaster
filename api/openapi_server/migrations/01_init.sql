@@ -1,11 +1,11 @@
 CREATE TABLE players (
-    id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     discord_id BIGINT NOT NULL,
     score BIGINT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE categories (
-    id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     name VARCHAR(255) NOT NULL,
     description TEXT
 );
@@ -18,6 +18,7 @@ CREATE TABLE player_categories_xref (
 
 -- should only ever have 1 row, to keep track of current session etc.
 CREATE TABLE season (
+    id SERIAL PRIMARY KEY,
     session INT NOT NULL,
     start_time TIMESTAMP,
     end_time TIMESTAMP
@@ -26,7 +27,7 @@ CREATE TABLE season (
 INSERT INTO season (session) VALUES (0);
 
 CREATE TABLE tasks (
-    id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     description TEXT NOT NULL,
     points INT,
     min_session INT,

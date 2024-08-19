@@ -4,17 +4,16 @@ import connexion
 
 from openapi_server import encoder
 
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-db = SQLAlchemy()
+from . import db
 
 def main():
     app = connexion.App(__name__, specification_dir='./openapi/')
     app.app.json_encoder = encoder.JSONEncoder
 
     # Configure the database URI
-    app.app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost:1121'
+    app.app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@task-postgres:5432/task'
     app.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable track modifications to save resources
 
     db.app = app.app
