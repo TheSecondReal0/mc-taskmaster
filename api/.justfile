@@ -1,7 +1,7 @@
 run:
     docker rm -f task-api
     docker build --no-cache -t task-api .
-    docker run -d -p 1122:1122 --name task-api task-api
+    docker run -p 1122:1122 --name task-api task-api
 
 psql:
     psql -h localhost -p 1121 -U postgres

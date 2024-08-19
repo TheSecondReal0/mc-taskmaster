@@ -27,7 +27,6 @@ INSERT INTO season (session) VALUES (0);
 
 CREATE TABLE tasks (
     id UUID PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL, -- unique name of the task, necessary?
     description TEXT NOT NULL,
     points INT,
     min_session INT,
