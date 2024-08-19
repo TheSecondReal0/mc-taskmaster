@@ -28,11 +28,12 @@ def get_tasks() -> GetTasks200Response:
     )
 
 def create_task(create_task_request: CreateTaskRequest) -> Task:
-    to_insert: models.Task = models.Task()
-    to_insert.description = create_task_request.description
-    to_insert.points = create_task_request.points
-    to_insert.min_session = create_task_request.min_session
-    to_insert.max_session = create_task_request.max_session
+    to_insert: models.Task = models.Task(
+        description = create_task_request.description,
+        points = create_task_request.points,
+        min_session = create_task_request.min_session,
+        max_session = create_task_request.max_session
+        )
 
     if create_task_request.categories is not None:
         to_insert.categories = create_task_request.categories
@@ -42,7 +43,9 @@ def create_task(create_task_request: CreateTaskRequest) -> Task:
     db.session.add(to_insert)
     db.session.commit()
 
-    return map_db_task_to_task(to_insert)
+    ret = map_db_task_to_task(to_insert)
+    print(ret)
+    return ret
 
 def map_db_task_to_task(db_task: models.Task) -> Task:
     return Task(

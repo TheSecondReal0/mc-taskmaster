@@ -48,7 +48,6 @@ paths:
                   items:
                     type: string
               required:
-                - name
                 - description
                 - points
       responses:

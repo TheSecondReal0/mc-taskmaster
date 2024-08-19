@@ -11,7 +11,7 @@ from openapi_server import util
 from ..biz import task_biz
 
 
-def create_task(create_task_request):  # noqa: E501
+def create_task():  # noqa: E501
     """create_task
 
      # noqa: E501
@@ -23,7 +23,8 @@ def create_task(create_task_request):  # noqa: E501
     """
     if connexion.request.is_json:
         create_task_request = CreateTaskRequest.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    print(create_task_request)
+    return task_biz.create_task(create_task_request)
 
 
 def get_tasks():  # noqa: E501
