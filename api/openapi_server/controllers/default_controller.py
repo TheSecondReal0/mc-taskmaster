@@ -26,6 +26,32 @@ def create_task():  # noqa: E501
     return task_biz.create_task(create_task_request)
 
 
+def delete_task(task_id):  # noqa: E501
+    """delete_task
+
+     # noqa: E501
+
+    :param task_id: 
+    :type task_id: str
+
+    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
+    """
+    task_biz.delete_task(task_id)
+
+
+def get_task(task_id):  # noqa: E501
+    """get_task
+
+     # noqa: E501
+
+    :param task_id: 
+    :type task_id: str
+
+    :rtype: Union[Task, Tuple[Task, int], Tuple[Task, int, Dict[str, str]]
+    """
+    return task_biz.get_task(task_id)
+
+
 def get_tasks():  # noqa: E501
     """get_tasks
 

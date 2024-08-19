@@ -34,6 +34,42 @@ paths:
           description: Task created successfully
       x-openapi-router-controller: openapi_server.controllers.default_controller
   /tasks/{task_id}:
+    delete:
+      operationId: delete_task
+      parameters:
+      - explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Task deleted successfully
+        "404":
+          description: Task not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    get:
+      operationId: get_task
+      parameters:
+      - explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Task corresponding to id
+        "404":
+          description: Task not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
     put:
       operationId: update_task
       parameters:

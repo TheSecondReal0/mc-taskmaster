@@ -54,14 +54,25 @@ paths:
                 $ref: '#/components/schemas/Task'
           description: Task created successfully
   /tasks/{task_id}:
+    parameters:
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: get_task
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Task corresponding to id
+        "404":
+          description: Task not found
     put:
       operationId: update_task
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
       requestBody:
         required: true
         content:
@@ -87,6 +98,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Task'
           description: Task updated successfully
+        "404":
+          description: Task not found
+    delete:
+      operationId: delete_task
+      responses:
+        "204":
+          description: Task deleted successfully
         "404":
           description: Task not found
 

@@ -7,6 +7,9 @@ from .. import db
 
 from ..database import models
 
+import uuid
+from flask import jsonify
+
 def get_tasks() -> GetTasks200Response:
     tasks = models.Task.query.all()
 
@@ -27,6 +30,16 @@ def get_tasks() -> GetTasks200Response:
         len(mapped)
     )
 
+def get_task(task_id) -> Task:
+    if not (validate_uuid(task_id)):
+        return invalid_uuid(task_id)
+
+    task = models.Task.query.get(task_id)
+    if not task:
+        return task_not_found(task_id)
+    
+    return map_db_task_to_task(task)
+
 def create_task(create_task_request: CreateTaskRequest) -> Task:
     to_insert: models.Task = models.Task(
         description = create_task_request.description,
@@ -41,7 +54,13 @@ def create_task(create_task_request: CreateTaskRequest) -> Task:
     return map_db_task_to_task(to_insert)
 
 def update_task(task_id, create_task_request: CreateTaskRequest) -> Task:
+    if not (validate_uuid(task_id)):
+        return invalid_uuid(task_id)
+
     to_update = models.Task.query.get(task_id)
+    if not to_update:
+        return task_not_found(task_id)
+    
     to_update.description = create_task_request.description
     to_update.points = create_task_request.points
     to_update.min_session = create_task_request.min_session
@@ -50,6 +69,17 @@ def update_task(task_id, create_task_request: CreateTaskRequest) -> Task:
     db.session.commit()
 
     return map_db_task_to_task(to_update)
+
+def delete_task(task_id):
+    if not (validate_uuid(task_id)):
+        return invalid_uuid(task_id)
+
+    task = models.Task.query.get(task_id)
+    if not task:
+        return task_not_found(task_id)
+    
+    db.session.delete(task)
+    db.session.commit()
 
 def map_db_task_to_task(db_task: models.Task) -> Task:
     return Task(
@@ -61,3 +91,19 @@ def map_db_task_to_task(db_task: models.Task) -> Task:
         db_task.enabled,
         db_task.categories
     )
+
+def validate_uuid(_uuid) -> bool:
+    try:
+        uuid.UUID(_uuid, version=4)
+    except ValueError:
+        return False
+    return True
+
+def bad_request(message: str = ""):
+    return jsonify({"error": message}), 400
+
+def invalid_uuid(task_id):
+    return bad_request(f"Invalid UUID: {task_id}")
+
+def task_not_found(task_id):
+    return jsonify({"error": f"Task not found: {task_id}"}), 404
