@@ -62,6 +62,13 @@ class Task(Base):
 
     categories = relationship("Category", secondary="task_categories_xref")
 
+    def __init__(self, description, points, min_session=None, max_session=None, enabled=True):
+        self.description = description
+        self.points = points
+        self.min_session = min_session
+        self.max_session = max_session
+        self.enabled = enabled
+
 
 class TaskCategoryXref(Base):
     __tablename__ = 'task_categories_xref'
