@@ -33,6 +33,33 @@ paths:
                 $ref: '#/components/schemas/Task'
           description: Task created successfully
       x-openapi-router-controller: openapi_server.controllers.default_controller
+  /tasks/{task_id}:
+    patch:
+      operationId: update_task
+      parameters:
+      - explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_task_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Task updated successfully
+        "404":
+          description: Task not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
 components:
   schemas:
     Category:
@@ -146,11 +173,6 @@ components:
         max_session:
           title: max_session
           type: integer
-        categories:
-          items:
-            type: string
-          title: categories
-          type: array
       required:
       - description
       - points

@@ -23,7 +23,6 @@ def create_task():  # noqa: E501
     """
     if connexion.request.is_json:
         create_task_request = CreateTaskRequest.from_dict(connexion.request.get_json())  # noqa: E501
-    print(create_task_request)
     return task_biz.create_task(create_task_request)
 
 
@@ -36,3 +35,20 @@ def get_tasks():  # noqa: E501
     :rtype: Union[GetTasks200Response, Tuple[GetTasks200Response, int], Tuple[GetTasks200Response, int, Dict[str, str]]
     """
     return task_biz.get_tasks()
+
+
+def update_task(task_id):  # noqa: E501
+    """update_task
+
+     # noqa: E501
+
+    :param task_id: 
+    :type task_id: str
+    :param create_task_request: 
+    :type create_task_request: dict | bytes
+
+    :rtype: Union[Task, Tuple[Task, int], Tuple[Task, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        create_task_request = CreateTaskRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'

@@ -35,11 +35,6 @@ def create_task(create_task_request: CreateTaskRequest) -> Task:
         max_session = create_task_request.max_session
         )
 
-    if create_task_request.categories is not None:
-        to_insert.categories = create_task_request.categories
-    else:
-        to_insert.categories = []
-
     db.session.add(to_insert)
     db.session.commit()
 

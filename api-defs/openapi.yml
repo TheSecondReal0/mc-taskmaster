@@ -43,20 +43,52 @@ paths:
                   type: integer
                 max_session:
                   type: integer
-                categories:
-                  type: array
-                  items:
-                    type: string
               required:
                 - description
                 - points
       responses:
-        '200':
-          description: Task created successfully
+        "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Task"
+                $ref: '#/components/schemas/Task'
+          description: Task created successfully
+  /tasks/{task_id}:
+    patch:
+      operationId: update_task
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                points:
+                  type: integer
+                min_session:
+                  type: integer
+                max_session:
+                  type: integer
+              required:
+                - description
+                - points
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Task updated successfully
+        "404":
+          description: Task not found
 
 #### WEB
 # get specific task
