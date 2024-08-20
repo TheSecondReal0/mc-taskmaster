@@ -362,6 +362,20 @@ components:
       example:
         score: 0
         id: id
+        categories:
+        - name: name
+          description: description
+          id: id
+        - name: name
+          description: description
+          id: id
+        tasks:
+        - name: name
+          description: description
+          id: id
+        - name: name
+          description: description
+          id: id
         discord_id: discord_id
       properties:
         id:
@@ -373,10 +387,21 @@ components:
         score:
           title: score
           type: integer
+        categories:
+          items:
+            $ref: '#/components/schemas/Category'
+          title: categories
+          type: array
+        tasks:
+          items:
+            $ref: '#/components/schemas/Category'
+          title: tasks
+          type: array
       required:
+      - categories
       - discord_id
       - id
-      - score
+      - tasks
       title: Player
     get_tasks_200_response:
       example:

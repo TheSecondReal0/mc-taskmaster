@@ -15,6 +15,7 @@ from openapi_server import util
 
 from ..biz import task_biz
 from ..biz import category_biz
+from ..biz import player_biz
 
 
 def add_category_to_task(task_id, category_id):  # noqa: E501
@@ -122,7 +123,7 @@ def get_player(discord_id):  # noqa: E501
 
     :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
     """
-    return 'do some magic!'
+    return player_biz.get_player(discord_id)
 
 
 def get_task(task_id):  # noqa: E501
@@ -181,7 +182,7 @@ def update_category(category_id):  # noqa: E501
     return category_biz.update_category(category_id, create_category_request)
 
 
-def update_player(discord_id, update_player_request):  # noqa: E501
+def update_player(player_id):  # noqa: E501
     """update_player
 
     Update data corresponding to player with given discord id # noqa: E501
@@ -195,7 +196,7 @@ def update_player(discord_id, update_player_request):  # noqa: E501
     """
     if connexion.request.is_json:
         update_player_request = UpdatePlayerRequest.from_dict(connexion.request.get_json())  # noqa: E501
-    return 'do some magic!'
+    return player_biz.update_player(player_id, update_player_request)
 
 
 def update_task(task_id):  # noqa: E501

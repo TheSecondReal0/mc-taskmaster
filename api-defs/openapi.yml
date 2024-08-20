@@ -342,7 +342,16 @@ components:
           type: string
         score:
           type: integer
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
+        tasks:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
       required:
         - id
         - discord_id
-        - score
+        - categories
+        - tasks
