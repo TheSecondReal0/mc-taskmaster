@@ -117,13 +117,14 @@ paths:
                 $ref: '#/components/schemas/Player'
           description: Player data
       x-openapi-router-controller: openapi_server.controllers.default_controller
+  /players/{player_id}:
     put:
-      description: Update data corresponding to player with given discord id
+      description: Update data corresponding to player with given id
       operationId: update_player
       parameters:
       - explode: false
         in: path
-        name: discord_id
+        name: player_id
         required: true
         schema:
           type: string

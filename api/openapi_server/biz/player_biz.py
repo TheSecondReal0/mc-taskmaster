@@ -30,7 +30,7 @@ def update_player(player_id, update_player_request: UpdatePlayerRequest) -> Play
     if not to_update:
         return player_not_found(player_id)
     
-    to_update.points = update_player_request.points
+    to_update.score = update_player_request.score
 
     db.session.commit()
 

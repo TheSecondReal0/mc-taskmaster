@@ -254,9 +254,16 @@ paths:
               schema:
                 $ref: '#/components/schemas/Player'
           description: Player data
+  /players/{player_id}:
+    parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
     put:
       operationId: update_player
-      description: Update data corresponding to player with given discord id
+      description: Update data corresponding to player with given id
       requestBody:
         required: true
         content:

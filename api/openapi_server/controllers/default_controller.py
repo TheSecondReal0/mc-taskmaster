@@ -185,10 +185,10 @@ def update_category(category_id):  # noqa: E501
 def update_player(player_id):  # noqa: E501
     """update_player
 
-    Update data corresponding to player with given discord id # noqa: E501
+    Update data corresponding to player with given id # noqa: E501
 
-    :param discord_id: 
-    :type discord_id: str
+    :param player_id: 
+    :type player_id: str
     :param update_player_request: 
     :type update_player_request: dict | bytes
 
