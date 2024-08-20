@@ -8,7 +8,9 @@ from openapi_server.models.create_category_request import CreateCategoryRequest 
 from openapi_server.models.create_task_request import CreateTaskRequest  # noqa: E501
 from openapi_server.models.get_categories200_response import GetCategories200Response  # noqa: E501
 from openapi_server.models.get_tasks200_response import GetTasks200Response  # noqa: E501
+from openapi_server.models.player import Player  # noqa: E501
 from openapi_server.models.task import Task  # noqa: E501
+from openapi_server.models.update_player_request import UpdatePlayerRequest  # noqa: E501
 from openapi_server import util
 
 from ..biz import task_biz
@@ -92,7 +94,7 @@ def get_categories():  # noqa: E501
      # noqa: E501
 
 
-    :rtype: Union[List[Category], Tuple[List[Category], int], Tuple[List[Category], int, Dict[str, str]]
+    :rtype: Union[GetCategories200Response, Tuple[GetCategories200Response, int], Tuple[GetCategories200Response, int, Dict[str, str]]
     """
     return category_biz.get_categories()
 
@@ -108,6 +110,19 @@ def get_category(category_id):  # noqa: E501
     :rtype: Union[Category, Tuple[Category, int], Tuple[Category, int, Dict[str, str]]
     """
     return category_biz.get_category(category_id)
+
+
+def get_player(discord_id):  # noqa: E501
+    """get_player
+
+    Get player data corresponding to discord id, if player doesn&#39;t exist create # noqa: E501
+
+    :param discord_id: 
+    :type discord_id: str
+
+    :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
+    """
+    return 'do some magic!'
 
 
 def get_task(task_id):  # noqa: E501
@@ -164,6 +179,23 @@ def update_category(category_id):  # noqa: E501
     if connexion.request.is_json:
         create_category_request = CreateCategoryRequest.from_dict(connexion.request.get_json())  # noqa: E501
     return category_biz.update_category(category_id, create_category_request)
+
+
+def update_player(discord_id, update_player_request):  # noqa: E501
+    """update_player
+
+    Update data corresponding to player with given discord id # noqa: E501
+
+    :param discord_id: 
+    :type discord_id: str
+    :param update_player_request: 
+    :type update_player_request: dict | bytes
+
+    :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
+    """
+    if connexion.request.is_json:
+        update_player_request = UpdatePlayerRequest.from_dict(connexion.request.get_json())  # noqa: E501
+    return 'do some magic!'
 
 
 def update_task(task_id):  # noqa: E501

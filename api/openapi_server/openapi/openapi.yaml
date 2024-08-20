@@ -96,6 +96,52 @@ paths:
         "404":
           description: Category not found
       x-openapi-router-controller: openapi_server.controllers.default_controller
+  /players/{discord_id}:
+    get:
+      description: "Get player data corresponding to discord id, if player doesn't\
+        \ exist create"
+      operationId: get_player
+      parameters:
+      - explode: false
+        in: path
+        name: discord_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Player data
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    put:
+      description: Update data corresponding to player with given discord id
+      operationId: update_player
+      parameters:
+      - explode: false
+        in: path
+        name: discord_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/update_player_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
+      x-openapi-router-controller: openapi_server.controllers.default_controller
   /tasks:
     get:
       operationId: get_tasks
@@ -312,6 +358,26 @@ components:
       - points
       title: Task
       type: object
+    Player:
+      example:
+        score: 0
+        id: id
+        discord_id: discord_id
+      properties:
+        id:
+          title: id
+          type: string
+        discord_id:
+          title: discord_id
+          type: string
+        score:
+          title: score
+          type: integer
+      required:
+      - discord_id
+      - id
+      - score
+      title: Player
     get_tasks_200_response:
       example:
         count: 5
@@ -410,4 +476,13 @@ components:
       required:
       - name
       title: create_category_request
+      type: object
+    update_player_request:
+      properties:
+        score:
+          title: score
+          type: integer
+      required:
+      - score
+      title: update_player_request
       type: object

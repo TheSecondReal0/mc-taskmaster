@@ -17,7 +17,9 @@ openapi_server/models/create_category_request.py
 openapi_server/models/create_task_request.py
 openapi_server/models/get_categories200_response.py
 openapi_server/models/get_tasks200_response.py
+openapi_server/models/player.py
 openapi_server/models/task.py
+openapi_server/models/update_player_request.py
 openapi_server/openapi/openapi.yaml
 openapi_server/test/__init__.py
 openapi_server/typing_utils.py

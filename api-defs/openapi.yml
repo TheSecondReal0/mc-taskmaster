@@ -237,6 +237,46 @@ paths:
         "404":
           description: Category not found
 
+  /players/{discord_id}:
+    parameters:
+      - name: discord_id
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      operationId: get_player
+      description: Get player data corresponding to discord id, if player doesn't exist create
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Player data
+    put:
+      operationId: update_player
+      description: Update data corresponding to player with given discord id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                score:
+                  type: integer
+              required:
+                - score
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
+
+
 # add task to category (PUT /tasks/{taskId}/categories/{categoryId} ?)
 # remove task from category
 
@@ -294,3 +334,15 @@ components:
         - description
         - points
         - categories
+    Player:
+      properties:
+        id:
+          type: string
+        discord_id:
+          type: string
+        score:
+          type: integer
+      required:
+        - id
+        - discord_id
+        - score
