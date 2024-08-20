@@ -237,7 +237,7 @@ paths:
         "404":
           description: Category not found
 
-  /players/{discord_id}:
+  /players/{discord_id}/discord:
     parameters:
       - name: discord_id
         in: path
@@ -282,6 +282,42 @@ paths:
               schema:
                 $ref: '#/components/schemas/Player'
           description: Updated player data
+  /players/{player_id}/categories/{category_id}:
+    parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: category_id
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: add_category_to_player
+      description: Add a category to a player
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Category added to player successfully
+        "404":
+          description: Player or category not found
+    delete:
+      operationId: remove_category_from_player
+      description: Remove a category from a player
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Category removed from player successfully
+        "404":
+          description: Player or category not found
 
 
 # add task to category (PUT /tasks/{taskId}/categories/{categoryId} ?)

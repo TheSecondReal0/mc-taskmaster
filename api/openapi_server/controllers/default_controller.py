@@ -18,6 +18,21 @@ from ..biz import category_biz
 from ..biz import player_biz
 
 
+def add_category_to_player(player_id, category_id):  # noqa: E501
+    """add_category_to_player
+
+    Add a category to a player # noqa: E501
+
+    :param player_id: 
+    :type player_id: str
+    :param category_id: 
+    :type category_id: str
+
+    :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def add_category_to_task(task_id, category_id):  # noqa: E501
     """add_category_to_task
 
@@ -148,6 +163,21 @@ def get_tasks():  # noqa: E501
     :rtype: Union[GetTasks200Response, Tuple[GetTasks200Response, int], Tuple[GetTasks200Response, int, Dict[str, str]]
     """
     return task_biz.get_tasks()
+
+
+def remove_category_from_player(player_id, category_id):  # noqa: E501
+    """remove_category_from_player
+
+    Remove a category from a player # noqa: E501
+
+    :param player_id: 
+    :type player_id: str
+    :param category_id: 
+    :type category_id: str
+
+    :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
+    """
+    return 'do some magic!'
 
 
 def remove_category_from_task(task_id, category_id):  # noqa: E501
