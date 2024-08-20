@@ -140,6 +140,8 @@ paths:
               properties:
                 name:
                   type: string
+                description:
+                  type: string
               required:
                 - name
       responses:
@@ -178,6 +180,8 @@ paths:
               properties:
                 name:
                   type: string
+                description:
+                  type: string
               required:
                 - name
       responses:
@@ -196,10 +200,6 @@ paths:
           description: Category deleted successfully
         "404":
           description: Category not found
-
-# add category
-# update category
-# delete category
 
 # add task to category (PUT /tasks/{taskId}/categories/{categoryId} ?)
 # remove task from category
@@ -228,6 +228,11 @@ components:
           type: string
         name:
           type: string
+        description:
+          type: string
+      required:
+        - id
+        - name
     Task:
       type: object
       properties:

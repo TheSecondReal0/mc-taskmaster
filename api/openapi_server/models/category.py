@@ -12,26 +12,31 @@ class Category(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, name=None):  # noqa: E501
+    def __init__(self, id=None, name=None, description=None):  # noqa: E501
         """Category - a model defined in OpenAPI
 
         :param id: The id of this Category.  # noqa: E501
         :type id: str
         :param name: The name of this Category.  # noqa: E501
         :type name: str
+        :param description: The description of this Category.  # noqa: E501
+        :type description: str
         """
         self.openapi_types = {
             'id': str,
-            'name': str
+            'name': str,
+            'description': str
         }
 
         self.attribute_map = {
             'id': 'id',
-            'name': 'name'
+            'name': 'name',
+            'description': 'description'
         }
 
         self._id = id
         self._name = name
+        self._description = description
 
     @classmethod
     def from_dict(cls, dikt) -> 'Category':
@@ -62,6 +67,8 @@ class Category(Model):
         :param id: The id of this Category.
         :type id: str
         """
+        if id is None:
+            raise ValueError("Invalid value for `id`, must not be `None`")  # noqa: E501
 
         self._id = id
 
@@ -83,5 +90,28 @@ class Category(Model):
         :param name: The name of this Category.
         :type name: str
         """
+        if name is None:
+            raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
+
+    @property
+    def description(self) -> str:
+        """Gets the description of this Category.
+
+
+        :return: The description of this Category.
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description: str):
+        """Sets the description of this Category.
+
+
+        :param description: The description of this Category.
+        :type description: str
+        """
+
+        self._description = description

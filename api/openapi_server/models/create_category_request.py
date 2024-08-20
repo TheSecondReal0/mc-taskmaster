@@ -12,21 +12,26 @@ class CreateCategoryRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, name=None):  # noqa: E501
+    def __init__(self, name=None, description=None):  # noqa: E501
         """CreateCategoryRequest - a model defined in OpenAPI
 
         :param name: The name of this CreateCategoryRequest.  # noqa: E501
         :type name: str
+        :param description: The description of this CreateCategoryRequest.  # noqa: E501
+        :type description: str
         """
         self.openapi_types = {
-            'name': str
+            'name': str,
+            'description': str
         }
 
         self.attribute_map = {
-            'name': 'name'
+            'name': 'name',
+            'description': 'description'
         }
 
         self._name = name
+        self._description = description
 
     @classmethod
     def from_dict(cls, dikt) -> 'CreateCategoryRequest':
@@ -61,3 +66,24 @@ class CreateCategoryRequest(Model):
             raise ValueError("Invalid value for `name`, must not be `None`")  # noqa: E501
 
         self._name = name
+
+    @property
+    def description(self) -> str:
+        """Gets the description of this CreateCategoryRequest.
+
+
+        :return: The description of this CreateCategoryRequest.
+        :rtype: str
+        """
+        return self._description
+
+    @description.setter
+    def description(self, description: str):
+        """Sets the description of this CreateCategoryRequest.
+
+
+        :param description: The description of this CreateCategoryRequest.
+        :type description: str
+        """
+
+        self._description = description

@@ -25,5 +25,6 @@ def map_db_categories_to_categories(db_categories: list[models.Category]) -> lis
 def map_db_category_to_category(db_category: models.Category) -> Category:
     return Category(
         db_category.id,
-        db_category.name
+        db_category.name,
+        db_category.description
     )

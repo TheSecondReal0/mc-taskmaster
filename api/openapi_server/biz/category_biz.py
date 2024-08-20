@@ -32,7 +32,8 @@ def get_category(category_id) -> Category:
 
 def create_category(create_category_request: CreateCategoryRequest) -> Category:
     to_insert: models.Category = models.Category(
-        name = create_category_request.name
+        name = create_category_request.name,
+        description = create_category_request.description
         )
 
     db.session.add(to_insert)
@@ -49,6 +50,7 @@ def update_category(category_id, create_category_request: CreateCategoryRequest)
         return category_not_found(category_id)
     
     to_update.name = create_category_request.name
+    to_update.description = create_category_request.description
 
     db.session.commit()
 

@@ -192,6 +192,7 @@ components:
     Category:
       example:
         name: name
+        description: description
         id: id
       properties:
         id:
@@ -200,6 +201,12 @@ components:
         name:
           title: name
           type: string
+        description:
+          title: description
+          type: string
+      required:
+      - id
+      - name
       title: Category
     Task:
       example:
@@ -208,8 +215,10 @@ components:
         id: id
         categories:
         - name: name
+          description: description
           id: id
         - name: name
+          description: description
           id: id
         min_session: 6
         enabled: true
@@ -255,8 +264,10 @@ components:
           id: id
           categories:
           - name: name
+            description: description
             id: id
           - name: name
+            description: description
             id: id
           min_session: 6
           enabled: true
@@ -266,8 +277,10 @@ components:
           id: id
           categories:
           - name: name
+            description: description
             id: id
           - name: name
+            description: description
             id: id
           min_session: 6
           enabled: true
@@ -310,8 +323,10 @@ components:
         count: 0
         tasks:
         - name: name
+          description: description
           id: id
         - name: name
+          description: description
           id: id
       properties:
         tasks:
@@ -331,6 +346,9 @@ components:
       properties:
         name:
           title: name
+          type: string
+        description:
+          title: description
           type: string
       required:
       - name
