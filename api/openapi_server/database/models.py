@@ -33,7 +33,7 @@ class Player(Base):
 class Category(Base):
     __tablename__ = 'categories'
     id = Column(UUID_PG(as_uuid=True), primary_key=True, default=uuid.uuid4)
-    name = Column(String(255), nullable=False)
+    name = Column(String(255), nullable=False, unique=True)
     description = Column(Text)
 
 

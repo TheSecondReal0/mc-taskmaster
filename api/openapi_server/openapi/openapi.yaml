@@ -13,9 +13,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/Category'
-                type: array
+                $ref: '#/components/schemas/get_categories_200_response'
           description: OK
       x-openapi-router-controller: openapi_server.controllers.default_controller
     post:
@@ -306,6 +304,28 @@ components:
       - description
       - points
       title: create_task_request
+      type: object
+    get_categories_200_response:
+      example:
+        count: 0
+        tasks:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        tasks:
+          items:
+            $ref: '#/components/schemas/Category'
+          title: tasks
+          type: array
+        count:
+          title: count
+          type: integer
+      required:
+      - count
+      - tasks
+      title: get_categories_200_response
       type: object
     create_category_request:
       properties:

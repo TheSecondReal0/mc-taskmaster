@@ -9,6 +9,9 @@ def bad_request(message: str = ""):
 def task_not_found(task_id):
     return item_not_found("Task", task_id)
 
+def category_not_found(category_id):
+    return item_not_found("Category", category_id)
+
 def item_not_found(name: str, id: str):
     return not_found(f"{name} not found: {id}")
 

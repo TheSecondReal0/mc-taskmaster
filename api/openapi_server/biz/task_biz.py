@@ -14,17 +14,7 @@ from .helpers import *
 def get_tasks() -> GetTasks200Response:
     tasks = models.Task.query.all()
 
-    mapped = []
-    for task in tasks:
-        mapped.append(Task(
-            task.id,
-            task.description,
-            task.points,
-            task.min_session,
-            task.max_session,
-            task.enabled,
-            task.categories
-        ))
+    mapped = map_db_tasks_to_tasks(tasks)
     
     return GetTasks200Response(
         mapped,

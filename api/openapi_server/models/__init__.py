@@ -3,5 +3,6 @@
 from openapi_server.models.category import Category
 from openapi_server.models.create_category_request import CreateCategoryRequest
 from openapi_server.models.create_task_request import CreateTaskRequest
+from openapi_server.models.get_categories200_response import GetCategories200Response
 from openapi_server.models.get_tasks200_response import GetTasks200Response
 from openapi_server.models.task import Task

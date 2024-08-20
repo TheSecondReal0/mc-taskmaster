@@ -117,9 +117,17 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Category'
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Category"
+                  count:
+                    type: integer
+                required:
+                  - tasks
+                  - count
     post:
       operationId: create_category
       requestBody:
