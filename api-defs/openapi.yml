@@ -107,6 +107,42 @@ paths:
           description: Task deleted successfully
         "404":
           description: Task not found
+  /tasks/{task_id}/categories/{category_id}:
+    parameters:
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: category_id
+        in: path
+        required: true
+        schema:
+          type: string
+    put:
+      operationId: add_category_to_task
+      description: Add a category to a task
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Category added to task successfully
+        "404":
+          description: Task or category not found
+    delete:
+      operationId: remove_category_from_task
+      description: Remove a category from a task
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Category removed from task successfully
+        "404":
+          description: Task or category not found
 
   /categories:
     get:

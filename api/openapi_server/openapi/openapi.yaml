@@ -187,6 +187,63 @@ paths:
         "404":
           description: Task not found
       x-openapi-router-controller: openapi_server.controllers.default_controller
+  /tasks/{task_id}/categories/{category_id}:
+    delete:
+      description: Remove a category from a task
+      operationId: remove_category_from_task
+      parameters:
+      - explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: category_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Category removed from task successfully
+        "404":
+          description: Task or category not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    put:
+      description: Add a category to a task
+      operationId: add_category_to_task
+      parameters:
+      - explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: category_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+          description: Category added to task successfully
+        "404":
+          description: Task or category not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
 components:
   schemas:
     Category:

@@ -15,6 +15,21 @@ from ..biz import task_biz
 from ..biz import category_biz
 
 
+def add_category_to_task(task_id, category_id):  # noqa: E501
+    """add_category_to_task
+
+    Add a category to a task # noqa: E501
+
+    :param task_id: 
+    :type task_id: str
+    :param category_id: 
+    :type category_id: str
+
+    :rtype: Union[Task, Tuple[Task, int], Tuple[Task, int, Dict[str, str]]
+    """
+    return task_biz.add_category_to_task(task_id, category_id)
+
+
 def create_category():  # noqa: E501
     """create_category
 
@@ -117,6 +132,21 @@ def get_tasks():  # noqa: E501
     :rtype: Union[GetTasks200Response, Tuple[GetTasks200Response, int], Tuple[GetTasks200Response, int, Dict[str, str]]
     """
     return task_biz.get_tasks()
+
+
+def remove_category_from_task(task_id, category_id):  # noqa: E501
+    """remove_category_from_task
+
+    Remove a category from a task # noqa: E501
+
+    :param task_id: 
+    :type task_id: str
+    :param category_id: 
+    :type category_id: str
+
+    :rtype: Union[Task, Tuple[Task, int], Tuple[Task, int, Dict[str, str]]
+    """
+    return task_biz.remove_category_from_task(task_id, category_id)
 
 
 def update_category(category_id):  # noqa: E501

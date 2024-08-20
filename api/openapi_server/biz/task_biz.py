@@ -71,3 +71,45 @@ def delete_task(task_id):
     
     db.session.delete(task)
     db.session.commit()
+
+def add_category_to_task(task_id, category_id) -> Task:
+    if not (validate_uuid(task_id)):
+        return invalid_uuid(task_id)
+
+    task = models.Task.query.get(task_id)
+    if not task:
+        return task_not_found(task_id)
+    
+    if not (validate_uuid(category_id)):
+        return invalid_uuid(category_id)
+
+    category = models.Category.query.get(category_id)
+    if not category:
+        return category_not_found(category_id)
+    
+    if not category in task.categories:
+        task.categories.append(category)
+        db.session.commit()
+    
+    return map_db_task_to_task(task)
+
+def remove_category_from_task(task_id, category_id) -> Task:
+    if not (validate_uuid(task_id)):
+        return invalid_uuid(task_id)
+
+    task = models.Task.query.get(task_id)
+    if not task:
+        return task_not_found(task_id)
+    
+    if not (validate_uuid(category_id)):
+        return invalid_uuid(category_id)
+
+    category = models.Category.query.get(category_id)
+    if not category:
+        return category_not_found(category_id)
+    
+    if category in task.categories:
+        task.categories.remove(category)
+        db.session.commit()
+    
+    return map_db_task_to_task(task)
