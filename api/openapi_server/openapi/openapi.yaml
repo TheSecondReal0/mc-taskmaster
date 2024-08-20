@@ -5,6 +5,99 @@ info:
 servers:
 - url: http://api.task.jazure.net
 paths:
+  /categories:
+    get:
+      operationId: get_categories
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Category'
+                type: array
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    post:
+      operationId: create_category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_category_request'
+        description: Create a new category
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Category created successfully
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /categories/{category_id}:
+    delete:
+      operationId: delete_category
+      parameters:
+      - explode: false
+        in: path
+        name: category_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Category deleted successfully
+        "404":
+          description: Category not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    get:
+      operationId: get_category
+      parameters:
+      - explode: false
+        in: path
+        name: category_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Category corresponding to id
+        "404":
+          description: Category not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    put:
+      operationId: update_category
+      parameters:
+      - explode: false
+        in: path
+        name: category_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/create_category_request'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: Category updated successfully
+        "404":
+          description: Category not found
+      x-openapi-router-controller: openapi_server.controllers.default_controller
   /tasks:
     get:
       operationId: get_tasks
@@ -213,4 +306,13 @@ components:
       - description
       - points
       title: create_task_request
+      type: object
+    create_category_request:
+      properties:
+        name:
+          title: name
+          type: string
+      required:
+      - name
+      title: create_category_request
       type: object

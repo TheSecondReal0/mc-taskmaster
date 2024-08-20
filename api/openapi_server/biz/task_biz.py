@@ -7,8 +7,9 @@ from .. import db
 
 from ..database import models
 
-import uuid
-from flask import jsonify
+from .responses import *
+from .mappers import *
+from .helpers import *
 
 def get_tasks() -> GetTasks200Response:
     tasks = models.Task.query.all()
@@ -80,30 +81,3 @@ def delete_task(task_id):
     
     db.session.delete(task)
     db.session.commit()
-
-def map_db_task_to_task(db_task: models.Task) -> Task:
-    return Task(
-        db_task.id,
-        db_task.description,
-        db_task.points,
-        db_task.min_session,
-        db_task.max_session,
-        db_task.enabled,
-        db_task.categories
-    )
-
-def validate_uuid(_uuid) -> bool:
-    try:
-        uuid.UUID(_uuid, version=4)
-    except ValueError:
-        return False
-    return True
-
-def bad_request(message: str = ""):
-    return jsonify({"error": message}), 400
-
-def invalid_uuid(task_id):
-    return bad_request(f"Invalid UUID: {task_id}")
-
-def task_not_found(task_id):
-    return jsonify({"error": f"Task not found: {task_id}"}), 404
