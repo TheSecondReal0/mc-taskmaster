@@ -7,5 +7,6 @@ from openapi_server.models.get_categories200_response import GetCategories200Res
 from openapi_server.models.get_players200_response import GetPlayers200Response
 from openapi_server.models.get_tasks200_response import GetTasks200Response
 from openapi_server.models.player import Player
+from openapi_server.models.player_lite import PlayerLite
 from openapi_server.models.task import Task
 from openapi_server.models.update_player_request import UpdatePlayerRequest

@@ -427,18 +427,11 @@ components:
       - points
       title: Task
       type: object
-    Player:
+    PlayerLite:
       example:
         score: 0
         id: id
         categories:
-        - name: name
-          description: description
-          id: id
-        - name: name
-          description: description
-          id: id
-        tasks:
         - name: name
           description: description
           id: id
@@ -461,15 +454,31 @@ components:
             $ref: '#/components/schemas/Category'
           title: categories
           type: array
+      required:
+      - categories
+      - discord_id
+      - id
+      - score
+      title: PlayerLite
+    Player:
+      allOf:
+      - $ref: '#/components/schemas/PlayerLite'
+      - type: object
+      example:
+        tasks:
+        - name: name
+          description: description
+          id: id
+        - name: name
+          description: description
+          id: id
+      properties:
         tasks:
           items:
             $ref: '#/components/schemas/Category'
           title: tasks
           type: array
       required:
-      - categories
-      - discord_id
-      - id
       - tasks
       title: Player
     get_tasks_200_response:
@@ -583,24 +592,10 @@ components:
           - name: name
             description: description
             id: id
-          tasks:
-          - name: name
-            description: description
-            id: id
-          - name: name
-            description: description
-            id: id
           discord_id: discord_id
         - score: 0
           id: id
           categories:
-          - name: name
-            description: description
-            id: id
-          - name: name
-            description: description
-            id: id
-          tasks:
           - name: name
             description: description
             id: id
@@ -612,7 +607,7 @@ components:
       properties:
         players:
           items:
-            $ref: '#/components/schemas/Player'
+            $ref: '#/components/schemas/PlayerLite'
           title: players
           type: array
         count:

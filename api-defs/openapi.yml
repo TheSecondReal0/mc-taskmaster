@@ -251,7 +251,7 @@ paths:
                   players:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Player"
+                      $ref: "#/components/schemas/PlayerLite"
                   count:
                     type: integer
                 required:
@@ -397,7 +397,7 @@ components:
         - description
         - points
         - categories
-    Player:
+    PlayerLite:
       properties:
         id:
           type: string
@@ -409,12 +409,19 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Category"
+      required:
+        - id
+        - discord_id
+        - score
+        - categories
+    Player:
+      allOf:
+        - $ref: '#/components/schemas/PlayerLite'
+        - type: object
+      properties:
         tasks:
           type: array
           items:
             $ref: "#/components/schemas/Category"
       required:
-        - id
-        - discord_id
-        - categories
         - tasks

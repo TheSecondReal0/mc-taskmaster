@@ -1,5 +1,7 @@
 from openapi_server.models.update_player_request import UpdatePlayerRequest  # noqa: E501
+from openapi_server.models.get_players200_response import GetPlayers200Response  # noqa: E501
 from openapi_server.models.player import Player  # noqa: E501
+from openapi_server.models.player_lite import PlayerLite  # noqa: E501
 from ..models.category import Category
 
 from .. import db
@@ -9,6 +11,16 @@ from ..database import models
 from .responses import *
 from .mappers import *
 from .helpers import *
+
+def get_players() -> GetPlayers200Response:
+    players = models.Player.query.all()
+
+    mapped = map_db_players_to_player_lites(players)
+    
+    return GetPlayers200Response(
+        mapped,
+        len(mapped)
+    )
 
 def get_player_by_discord_id(discord_id) -> Player:
     player = models.Player.query.filter_by(discord_id=discord_id).first()

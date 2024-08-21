@@ -1,6 +1,6 @@
 CREATE TABLE players (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    discord_id BIGINT NOT NULL,
+    discord_id BIGINT UNIQUE NOT NULL,
     score BIGINT NOT NULL DEFAULT 0
 );
 

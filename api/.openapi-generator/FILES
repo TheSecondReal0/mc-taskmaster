@@ -19,6 +19,7 @@ openapi_server/models/get_categories200_response.py
 openapi_server/models/get_players200_response.py
 openapi_server/models/get_tasks200_response.py
 openapi_server/models/player.py
+openapi_server/models/player_lite.py
 openapi_server/models/task.py
 openapi_server/models/update_player_request.py
 openapi_server/openapi/openapi.yaml
