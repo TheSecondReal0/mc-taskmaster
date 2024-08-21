@@ -30,7 +30,7 @@ def add_category_to_player(player_id, category_id):  # noqa: E501
 
     :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
     """
-    return 'do some magic!'
+    return player_biz.add_category_to_player(player_id, category_id)
 
 
 def add_category_to_task(task_id, category_id):  # noqa: E501
@@ -177,7 +177,7 @@ def remove_category_from_player(player_id, category_id):  # noqa: E501
 
     :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
     """
-    return 'do some magic!'
+    return player_biz.remove_category_from_player(player_id, category_id)
 
 
 def remove_category_from_task(task_id, category_id):  # noqa: E501
