@@ -16,6 +16,7 @@ openapi_server/models/category.py
 openapi_server/models/create_category_request.py
 openapi_server/models/create_task_request.py
 openapi_server/models/get_categories200_response.py
+openapi_server/models/get_players200_response.py
 openapi_server/models/get_tasks200_response.py
 openapi_server/models/player.py
 openapi_server/models/task.py

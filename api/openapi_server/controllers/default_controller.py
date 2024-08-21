@@ -7,6 +7,7 @@ from openapi_server.models.category import Category  # noqa: E501
 from openapi_server.models.create_category_request import CreateCategoryRequest  # noqa: E501
 from openapi_server.models.create_task_request import CreateTaskRequest  # noqa: E501
 from openapi_server.models.get_categories200_response import GetCategories200Response  # noqa: E501
+from openapi_server.models.get_players200_response import GetPlayers200Response  # noqa: E501
 from openapi_server.models.get_tasks200_response import GetTasks200Response  # noqa: E501
 from openapi_server.models.player import Player  # noqa: E501
 from openapi_server.models.task import Task  # noqa: E501
@@ -128,8 +129,8 @@ def get_category(category_id):  # noqa: E501
     return category_biz.get_category(category_id)
 
 
-def get_player(discord_id):  # noqa: E501
-    """get_player
+def get_player_by_discord_id(discord_id):  # noqa: E501
+    """get_player_by_discord_id
 
     Get player data corresponding to discord id, if player doesn&#39;t exist create # noqa: E501
 
@@ -138,7 +139,18 @@ def get_player(discord_id):  # noqa: E501
 
     :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
     """
-    return player_biz.get_player(discord_id)
+    return player_biz.get_player_by_discord_id(discord_id)
+
+
+def get_players():  # noqa: E501
+    """get_players
+
+     # noqa: E501
+
+
+    :rtype: Union[GetPlayers200Response, Tuple[GetPlayers200Response, int], Tuple[GetPlayers200Response, int, Dict[str, str]]
+    """
+    return player_biz.get_players()
 
 
 def get_task(task_id):  # noqa: E501

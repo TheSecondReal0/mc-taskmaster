@@ -10,7 +10,7 @@ from .responses import *
 from .mappers import *
 from .helpers import *
 
-def get_player(discord_id) -> Player:
+def get_player_by_discord_id(discord_id) -> Player:
     player = models.Player.query.filter_by(discord_id=discord_id).first()
     if not player:
         player = models.Player(

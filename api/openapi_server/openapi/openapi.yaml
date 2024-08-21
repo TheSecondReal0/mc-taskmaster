@@ -96,11 +96,22 @@ paths:
         "404":
           description: Category not found
       x-openapi-router-controller: openapi_server.controllers.default_controller
+  /players:
+    get:
+      operationId: get_players
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/get_players_200_response'
+          description: OK
+      x-openapi-router-controller: openapi_server.controllers.default_controller
   /players/{discord_id}/discord:
     get:
       description: "Get player data corresponding to discord id, if player doesn't\
         \ exist create"
-      operationId: get_player
+      operationId: get_player_by_discord_id
       parameters:
       - explode: false
         in: path
@@ -559,6 +570,58 @@ components:
       required:
       - name
       title: create_category_request
+      type: object
+    get_players_200_response:
+      example:
+        players:
+        - score: 0
+          id: id
+          categories:
+          - name: name
+            description: description
+            id: id
+          - name: name
+            description: description
+            id: id
+          tasks:
+          - name: name
+            description: description
+            id: id
+          - name: name
+            description: description
+            id: id
+          discord_id: discord_id
+        - score: 0
+          id: id
+          categories:
+          - name: name
+            description: description
+            id: id
+          - name: name
+            description: description
+            id: id
+          tasks:
+          - name: name
+            description: description
+            id: id
+          - name: name
+            description: description
+            id: id
+          discord_id: discord_id
+        count: 6
+      properties:
+        players:
+          items:
+            $ref: '#/components/schemas/Player'
+          title: players
+          type: array
+        count:
+          title: count
+          type: integer
+      required:
+      - count
+      - players
+      title: get_players_200_response
       type: object
     update_player_request:
       properties:

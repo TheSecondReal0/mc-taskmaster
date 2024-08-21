@@ -237,6 +237,26 @@ paths:
         "404":
           description: Category not found
 
+  /players:
+    get:
+      operationId: get_players
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  players:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Player"
+                  count:
+                    type: integer
+                required:
+                  - players
+                  - count
   /players/{discord_id}/discord:
     parameters:
       - name: discord_id
@@ -245,7 +265,7 @@ paths:
         schema:
           type: string
     get:
-      operationId: get_player
+      operationId: get_player_by_discord_id
       description: Get player data corresponding to discord id, if player doesn't exist create
       responses:
         "200":
