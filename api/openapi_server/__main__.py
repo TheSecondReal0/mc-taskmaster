@@ -6,6 +6,8 @@ from openapi_server import encoder
 
 from flask_migrate import Migrate
 
+from flask_cors import CORS
+
 from . import db
 
 def main():
@@ -19,6 +21,8 @@ def main():
     db.app = app.app
     db.init_app(app.app)
     # migrate = Migrate(app, db)
+
+    CORS(app.app)
 
     app.add_api('openapi.yaml',
                 arguments={'title': 'MC Taskmaster'},
