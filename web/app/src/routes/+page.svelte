@@ -1,4 +1,7 @@
 <script lang="ts">
+    import '../lib/api/index'
+	import { DefaultApi } from '../lib/api/index';
+    
     // Dummy data for the table
     let originalData = [
       { id: 1, name: 'Alice', age: 25, job: 'Engineer' },
@@ -13,12 +16,18 @@
       console.log('Submitting changes:', data);
       originalData = structuredClone(data); // Update original data with current edits
       alert('Changes submitted successfully!');
+
+      console.log("sending API request bruh pls")
+      let defaultApi: DefaultApi = new DefaultApi();
+      console.log(defaultApi.getTasksRaw());
     }
   
     function revertChanges() {
       data = structuredClone(originalData); // Revert data to original state
       alert('Changes reverted!');
+      console.log("bruh bruh bruh");
     }
+
   </script>
   
   <style>
