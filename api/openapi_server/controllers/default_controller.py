@@ -105,6 +105,21 @@ def delete_task(task_id):  # noqa: E501
     task_biz.delete_task(task_id)
 
 
+def fail_task(player_id, task_id):  # noqa: E501
+    """fail_task
+
+    Fail one of the player&#39;s tasks # noqa: E501
+
+    :param player_id: 
+    :type player_id: str
+    :param task_id: 
+    :type task_id: str
+
+    :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
 def get_categories():  # noqa: E501
     """get_categories
 
@@ -205,6 +220,34 @@ def remove_category_from_task(task_id, category_id):  # noqa: E501
     :rtype: Union[Task, Tuple[Task, int], Tuple[Task, int, Dict[str, str]]
     """
     return task_biz.remove_category_from_task(task_id, category_id)
+
+
+def reset_player_tasks(player_id):  # noqa: E501
+    """reset_player_tasks
+
+    Reset tasks of player # noqa: E501
+
+    :param player_id: 
+    :type player_id: str
+
+    :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def succeed_task(player_id, task_id):  # noqa: E501
+    """succeed_task
+
+    Succeed one of the player&#39;s tasks # noqa: E501
+
+    :param player_id: 
+    :type player_id: str
+    :param task_id: 
+    :type task_id: str
+
+    :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
+    """
+    return 'do some magic!'
 
 
 def update_category(category_id):  # noqa: E501

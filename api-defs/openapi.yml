@@ -354,10 +354,67 @@ paths:
           description: Category removed from player successfully
         "404":
           description: Player or category not found
-
-
-# add task to category (PUT /tasks/{taskId}/categories/{categoryId} ?)
-# remove task from category
+  /players/{player_id}/tasks/reset:
+    parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: reset_player_tasks
+      description: Reset tasks of player
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
+  /players/{player_id}/tasks/{task_id}/fail:
+    parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: fail_task
+      description: Fail one of the player's tasks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
+  /players/{player_id}/tasks/{task_id}/succeed:
+    parameters:
+      - name: player_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: task_id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      operationId: succeed_task
+      description: Succeed one of the player's tasks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
 
 #### DISCORD BOT
 # look at current discord bot for what we need to support
@@ -367,9 +424,6 @@ paths:
 # /player/{playerId}/tasks/reroll (assign tasks to player)
 # /player/{playerId}/tasks/{taskId OR idx in time_assigned order}/fail POST
 # /player/{playerId}/tasks/{taskId OR idx in time_assigned order}/complete POST
-
-# /player/{playerId}/categories/{categoryId} PUT
-# /player/{playerId}/categories/{categoryId} DEL
 
 #### MANAGEMENT
 # /session/start POST

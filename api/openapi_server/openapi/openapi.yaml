@@ -211,6 +211,80 @@ paths:
         "404":
           description: Player or category not found
       x-openapi-router-controller: openapi_server.controllers.default_controller
+  /players/{player_id}/tasks/reset:
+    post:
+      description: Reset tasks of player
+      operationId: reset_player_tasks
+      parameters:
+      - explode: false
+        in: path
+        name: player_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /players/{player_id}/tasks/{task_id}/fail:
+    post:
+      description: Fail one of the player's tasks
+      operationId: fail_task
+      parameters:
+      - explode: false
+        in: path
+        name: player_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /players/{player_id}/tasks/{task_id}/succeed:
+    post:
+      description: Succeed one of the player's tasks
+      operationId: succeed_task
+      parameters:
+      - explode: false
+        in: path
+        name: player_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: task_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+          description: Updated player data
+      x-openapi-router-controller: openapi_server.controllers.default_controller
   /tasks:
     get:
       operationId: get_tasks
