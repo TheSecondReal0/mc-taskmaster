@@ -13,7 +13,7 @@
  */
 
 
-export const BASE_PATH = "http://task-api.jazure.net".replace(/\/+$/, "");
+export const BASE_PATH = "https://task-api.jazure.net".replace(/\/+$/, "");
 
 export interface ConfigurationParameters {
     basePath?: string; // override base path

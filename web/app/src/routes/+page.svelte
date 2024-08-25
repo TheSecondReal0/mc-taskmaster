@@ -8,29 +8,20 @@
     let tasks: any = [
   ];
 
-  let taskApi: DefaultApi = new DefaultApi;
-  taskApi.getTasks().then(response => tasks = response).catch(error => console.log(error));
-  console.log(tasks);
-  
-    let data = structuredClone(tasks); // Clone data for editing
-  
-    function submitChanges() {
-      // In a real application, this would be where you send data to the server
-      console.log('Submitting changes:', tasks);
-      let originalData = structuredClone(tasks); // Update original data with current edits
-      alert('Changes submitted successfully!');
+  // Function to fetch tasks from the API
+  async function fetchTasks() {
+        let taskApi: DefaultApi = new DefaultApi();
+        try {
+            const response = await taskApi.getTasks();
+            tasks = response.tasks; // Make sure you're accessing the right property
+            console.log(tasks)
+        } catch (error) {
+            console.error('Error fetching tasks:', error);
+        }
+    }
 
-      console.log("sending API request bruh pls")
-      let defaultApi: DefaultApi = new DefaultApi();
-      const response: any = defaultApi.getTasks().then(result => console.log(result));
-      console.log(response);
-    }
-  
-    function revertChanges() {
-      data = structuredClone(tasks); // Revert data to original state
-      alert('Changes reverted!');
-      console.log("bruh bruh bruh");
-    }
+    // Fetch tasks when the component is mounted
+    fetchTasks();
 
   </script>
   
@@ -101,10 +92,5 @@
   <div class="container">
     <TaskTable {tasks}>
     </TaskTable>
-  
-    <div class="button-container">
-      <button class="submit" on:click={submitChanges}>Submit Changes</button>
-      <button class="revert" on:click={revertChanges}>Revert Changes</button>
-    </div>
   </div>
   

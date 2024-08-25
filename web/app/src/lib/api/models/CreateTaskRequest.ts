@@ -43,6 +43,12 @@ export interface CreateTaskRequest {
      * @memberof CreateTaskRequest
      */
     maxSession?: number;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof CreateTaskRequest
+     */
+    categories?: Array<string>;
 }
 
 /**
@@ -68,6 +74,7 @@ export function CreateTaskRequestFromJSONTyped(json: any, ignoreDiscriminator: b
         'points': json['points'],
         'minSession': json['min_session'] == null ? undefined : json['min_session'],
         'maxSession': json['max_session'] == null ? undefined : json['max_session'],
+        'categories': json['categories'] == null ? undefined : json['categories'],
     };
 }
 
@@ -81,6 +88,7 @@ export function CreateTaskRequestToJSON(value?: CreateTaskRequest | null): any {
         'points': value['points'],
         'min_session': value['minSession'],
         'max_session': value['maxSession'],
+        'categories': value['categories'],
     };
 }
 
