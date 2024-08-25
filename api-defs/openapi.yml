@@ -41,8 +41,12 @@ paths:
                   type: integer
                 min_session:
                   type: integer
+                  nullable: true
+                  default: null
                 max_session:
                   type: integer
+                  nullable: true
+                  default: null
                 categories:
                   type: array
                   items:
@@ -90,8 +94,12 @@ paths:
                   type: integer
                 min_session:
                   type: integer
+                  nullable: true
+                  default: null
                 max_session:
                   type: integer
+                  nullable: true
+                  default: null
                 categories:
                   type: array
                   items:
