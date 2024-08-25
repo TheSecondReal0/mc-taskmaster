@@ -3,7 +3,7 @@ info:
   title: MC Taskmaster
   version: "1.0"
 servers:
-- url: http://api.task.jazure.net
+- url: http://task-api.jazure.net
 paths:
   /categories:
     get:
@@ -539,6 +539,11 @@ components:
         max_session:
           title: max_session
           type: integer
+        categories:
+          items:
+            type: string
+          title: categories
+          type: array
       required:
       - description
       - points

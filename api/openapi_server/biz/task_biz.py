@@ -38,7 +38,9 @@ def create_task(create_task_request: CreateTaskRequest) -> Task:
         min_session = create_task_request.min_session,
         max_session = create_task_request.max_session
         )
-
+    
+    to_insert.categories = models.Category.query.filter(models.Category.id.in_(create_task_request.categories)).all()
+    
     db.session.add(to_insert)
     db.session.commit()
 
@@ -56,6 +58,7 @@ def update_task(task_id, create_task_request: CreateTaskRequest) -> Task:
     to_update.points = create_task_request.points
     to_update.min_session = create_task_request.min_session
     to_update.max_session = create_task_request.max_session
+    to_update.categories = models.Category.query.filter(models.Category.id.in_(create_task_request.categories)).all()
 
     db.session.commit()
 

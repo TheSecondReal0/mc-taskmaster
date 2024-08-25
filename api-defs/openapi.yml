@@ -43,6 +43,10 @@ paths:
                   type: integer
                 max_session:
                   type: integer
+                categories:
+                  type: array
+                  items:
+                    type: string
               required:
                 - description
                 - points
@@ -88,6 +92,10 @@ paths:
                   type: integer
                 max_session:
                   type: integer
+                categories:
+                  type: array
+                  items:
+                    type: string
               required:
                 - description
                 - points

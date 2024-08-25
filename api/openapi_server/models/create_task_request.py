@@ -12,7 +12,7 @@ class CreateTaskRequest(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, description=None, points=None, min_session=None, max_session=None):  # noqa: E501
+    def __init__(self, description=None, points=None, min_session=None, max_session=None, categories=None):  # noqa: E501
         """CreateTaskRequest - a model defined in OpenAPI
 
         :param description: The description of this CreateTaskRequest.  # noqa: E501
@@ -23,25 +23,30 @@ class CreateTaskRequest(Model):
         :type min_session: int
         :param max_session: The max_session of this CreateTaskRequest.  # noqa: E501
         :type max_session: int
+        :param categories: The categories of this CreateTaskRequest.  # noqa: E501
+        :type categories: List[str]
         """
         self.openapi_types = {
             'description': str,
             'points': int,
             'min_session': int,
-            'max_session': int
+            'max_session': int,
+            'categories': List[str]
         }
 
         self.attribute_map = {
             'description': 'description',
             'points': 'points',
             'min_session': 'min_session',
-            'max_session': 'max_session'
+            'max_session': 'max_session',
+            'categories': 'categories'
         }
 
         self._description = description
         self._points = points
         self._min_session = min_session
         self._max_session = max_session
+        self._categories = categories
 
     @classmethod
     def from_dict(cls, dikt) -> 'CreateTaskRequest':
@@ -141,3 +146,24 @@ class CreateTaskRequest(Model):
         """
 
         self._max_session = max_session
+
+    @property
+    def categories(self) -> List[str]:
+        """Gets the categories of this CreateTaskRequest.
+
+
+        :return: The categories of this CreateTaskRequest.
+        :rtype: List[str]
+        """
+        return self._categories
+
+    @categories.setter
+    def categories(self, categories: List[str]):
+        """Sets the categories of this CreateTaskRequest.
+
+
+        :param categories: The categories of this CreateTaskRequest.
+        :type categories: List[str]
+        """
+
+        self._categories = categories
