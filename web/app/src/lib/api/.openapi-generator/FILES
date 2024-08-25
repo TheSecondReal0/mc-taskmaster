@@ -2,7 +2,14 @@ apis/DefaultApi.ts
 apis/index.ts
 index.ts
 models/Category.ts
+models/CreateCategoryRequest.ts
+models/CreateTaskRequest.ts
+models/GetCategories200Response.ts
+models/GetPlayers200Response.ts
 models/GetTasks200Response.ts
+models/Player.ts
+models/PlayerLite.ts
 models/Task.ts
+models/UpdatePlayerRequest.ts
 models/index.ts
 runtime.ts

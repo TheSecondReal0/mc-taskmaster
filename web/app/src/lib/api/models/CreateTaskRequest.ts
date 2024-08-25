@@ -13,107 +13,74 @@
  */
 
 import { mapValues } from '../runtime';
-import type { Category } from './Category';
-import {
-    CategoryFromJSON,
-    CategoryFromJSONTyped,
-    CategoryToJSON,
-} from './Category';
-
 /**
  * 
  * @export
- * @interface Task
+ * @interface CreateTaskRequest
  */
-export interface Task {
+export interface CreateTaskRequest {
     /**
      * 
      * @type {string}
-     * @memberof Task
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Task
+     * @memberof CreateTaskRequest
      */
     description: string;
     /**
      * 
      * @type {number}
-     * @memberof Task
+     * @memberof CreateTaskRequest
      */
     points: number;
     /**
      * 
      * @type {number}
-     * @memberof Task
+     * @memberof CreateTaskRequest
      */
     minSession?: number;
     /**
      * 
      * @type {number}
-     * @memberof Task
+     * @memberof CreateTaskRequest
      */
     maxSession?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof Task
-     */
-    enabled?: boolean;
-    /**
-     * 
-     * @type {Array<Category>}
-     * @memberof Task
-     */
-    categories: Array<Category>;
 }
 
 /**
- * Check if a given object implements the Task interface.
+ * Check if a given object implements the CreateTaskRequest interface.
  */
-export function instanceOfTask(value: object): value is Task {
-    if (!('id' in value) || value['id'] === undefined) return false;
+export function instanceOfCreateTaskRequest(value: object): value is CreateTaskRequest {
     if (!('description' in value) || value['description'] === undefined) return false;
     if (!('points' in value) || value['points'] === undefined) return false;
-    if (!('categories' in value) || value['categories'] === undefined) return false;
     return true;
 }
 
-export function TaskFromJSON(json: any): Task {
-    return TaskFromJSONTyped(json, false);
+export function CreateTaskRequestFromJSON(json: any): CreateTaskRequest {
+    return CreateTaskRequestFromJSONTyped(json, false);
 }
 
-export function TaskFromJSONTyped(json: any, ignoreDiscriminator: boolean): Task {
+export function CreateTaskRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateTaskRequest {
     if (json == null) {
         return json;
     }
     return {
         
-        'id': json['id'],
         'description': json['description'],
         'points': json['points'],
         'minSession': json['min_session'] == null ? undefined : json['min_session'],
         'maxSession': json['max_session'] == null ? undefined : json['max_session'],
-        'enabled': json['enabled'] == null ? undefined : json['enabled'],
-        'categories': ((json['categories'] as Array<any>).map(CategoryFromJSON)),
     };
 }
 
-export function TaskToJSON(value?: Task | null): any {
+export function CreateTaskRequestToJSON(value?: CreateTaskRequest | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'id': value['id'],
         'description': value['description'],
         'points': value['points'],
         'min_session': value['minSession'],
         'max_session': value['maxSession'],
-        'enabled': value['enabled'],
-        'categories': ((value['categories'] as Array<any>).map(CategoryToJSON)),
     };
 }
 

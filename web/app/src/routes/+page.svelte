@@ -1,29 +1,33 @@
 <script lang="ts">
     import '../lib/api/index'
-	import { DefaultApi } from '../lib/api/index';
+	import { DefaultApi, type GetTasks200Response } from '../lib/api/index';
+
+  import TaskTable from '$lib/components/TaskTable.svelte';
     
     // Dummy data for the table
-    let originalData = [
-      { id: 1, name: 'Alice', age: 25, job: 'Engineer' },
-      { id: 2, name: 'Bob', age: 30, job: 'Designer' },
-      { id: 3, name: 'Charlie', age: 28, job: 'Developer' },
-    ];
+    let tasks: any = [
+  ];
+
+  let taskApi: DefaultApi = new DefaultApi;
+  taskApi.getTasks().then(response => tasks = response).catch(error => console.log(error));
+  console.log(tasks);
   
-    let data = structuredClone(originalData); // Clone data for editing
+    let data = structuredClone(tasks); // Clone data for editing
   
     function submitChanges() {
       // In a real application, this would be where you send data to the server
-      console.log('Submitting changes:', data);
-      originalData = structuredClone(data); // Update original data with current edits
+      console.log('Submitting changes:', tasks);
+      let originalData = structuredClone(tasks); // Update original data with current edits
       alert('Changes submitted successfully!');
 
       console.log("sending API request bruh pls")
       let defaultApi: DefaultApi = new DefaultApi();
-      console.log(defaultApi.getTasksRaw());
+      const response: any = defaultApi.getTasks().then(result => console.log(result));
+      console.log(response);
     }
   
     function revertChanges() {
-      data = structuredClone(originalData); // Revert data to original state
+      data = structuredClone(tasks); // Revert data to original state
       alert('Changes reverted!');
       console.log("bruh bruh bruh");
     }
@@ -40,55 +44,6 @@
       border-radius: 12px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-  
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #333;
-    }
-  
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-  
-    thead {
-      background-color: #007bff;
-      color: white;
-    }
-  
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #ddd;
-    }
-  
-    th {
-      text-transform: uppercase;
-      font-size: 0.85rem;
-    }
-  
-    tbody tr:nth-child(even) {
-      background-color: #f2f2f2;
-    }
-  
-    tbody tr:hover {
-      background-color: #e9f5ff;
-    }
-  
-    td {
-      font-size: 0.95rem;
-      color: #555;
-    }
-  
-    input[type="text"] {
-      width: 100%;
-      padding: 5px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
     }
   
     .button-container {
@@ -140,41 +95,12 @@
       }
     }
   </style>
+
+<!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval';"> -->
   
   <div class="container">
-    <h1>User Information</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Job</th>
-        </tr>
-      </thead>
-      <tbody>
-        {#each data as row, index}
-          <tr>
-            <td>{row.id}</td>
-            <td>
-              <input
-                type="text"
-                bind:value={data[index].name} />
-            </td>
-            <td>
-              <input
-                type="text"
-                bind:value={data[index].age} />
-            </td>
-            <td>
-              <input
-                type="text"
-                bind:value={data[index].job} />
-            </td>
-          </tr>
-        {/each}
-      </tbody>
-    </table>
+    <TaskTable {tasks}>
+    </TaskTable>
   
     <div class="button-container">
       <button class="submit" on:click={submitChanges}>Submit Changes</button>

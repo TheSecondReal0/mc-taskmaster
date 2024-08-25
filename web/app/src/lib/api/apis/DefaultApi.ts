@@ -15,17 +15,455 @@
 
 import * as runtime from '../runtime';
 import type {
+  Category,
+  CreateCategoryRequest,
+  CreateTaskRequest,
+  GetCategories200Response,
+  GetPlayers200Response,
   GetTasks200Response,
+  Player,
+  Task,
+  UpdatePlayerRequest,
 } from '../models/index';
 import {
+    CategoryFromJSON,
+    CategoryToJSON,
+    CreateCategoryRequestFromJSON,
+    CreateCategoryRequestToJSON,
+    CreateTaskRequestFromJSON,
+    CreateTaskRequestToJSON,
+    GetCategories200ResponseFromJSON,
+    GetCategories200ResponseToJSON,
+    GetPlayers200ResponseFromJSON,
+    GetPlayers200ResponseToJSON,
     GetTasks200ResponseFromJSON,
     GetTasks200ResponseToJSON,
+    PlayerFromJSON,
+    PlayerToJSON,
+    TaskFromJSON,
+    TaskToJSON,
+    UpdatePlayerRequestFromJSON,
+    UpdatePlayerRequestToJSON,
 } from '../models/index';
+
+export interface AddCategoryToPlayerRequest {
+    playerId: string;
+    categoryId: string;
+}
+
+export interface AddCategoryToTaskRequest {
+    taskId: string;
+    categoryId: string;
+}
+
+export interface CreateCategoryOperationRequest {
+    createCategoryRequest: CreateCategoryRequest;
+}
+
+export interface CreateTaskOperationRequest {
+    createTaskRequest: CreateTaskRequest;
+}
+
+export interface DeleteCategoryRequest {
+    categoryId: string;
+}
+
+export interface DeleteTaskRequest {
+    taskId: string;
+}
+
+export interface GetCategoryRequest {
+    categoryId: string;
+}
+
+export interface GetPlayerByDiscordIdRequest {
+    discordId: string;
+}
+
+export interface GetTaskRequest {
+    taskId: string;
+}
+
+export interface RemoveCategoryFromPlayerRequest {
+    playerId: string;
+    categoryId: string;
+}
+
+export interface RemoveCategoryFromTaskRequest {
+    taskId: string;
+    categoryId: string;
+}
+
+export interface UpdateCategoryRequest {
+    categoryId: string;
+    createCategoryRequest: CreateCategoryRequest;
+}
+
+export interface UpdatePlayerOperationRequest {
+    playerId: string;
+    updatePlayerRequest: UpdatePlayerRequest;
+}
+
+export interface UpdateTaskRequest {
+    taskId: string;
+    createTaskRequest: CreateTaskRequest;
+}
 
 /**
  * 
  */
 export class DefaultApi extends runtime.BaseAPI {
+
+    /**
+     * Add a category to a player
+     */
+    async addCategoryToPlayerRaw(requestParameters: AddCategoryToPlayerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Player>> {
+        if (requestParameters['playerId'] == null) {
+            throw new runtime.RequiredError(
+                'playerId',
+                'Required parameter "playerId" was null or undefined when calling addCategoryToPlayer().'
+            );
+        }
+
+        if (requestParameters['categoryId'] == null) {
+            throw new runtime.RequiredError(
+                'categoryId',
+                'Required parameter "categoryId" was null or undefined when calling addCategoryToPlayer().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/players/{player_id}/categories/{category_id}`.replace(`{${"player_id"}}`, encodeURIComponent(String(requestParameters['playerId']))).replace(`{${"category_id"}}`, encodeURIComponent(String(requestParameters['categoryId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a category to a player
+     */
+    async addCategoryToPlayer(requestParameters: AddCategoryToPlayerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Player> {
+        const response = await this.addCategoryToPlayerRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Add a category to a task
+     */
+    async addCategoryToTaskRaw(requestParameters: AddCategoryToTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Task>> {
+        if (requestParameters['taskId'] == null) {
+            throw new runtime.RequiredError(
+                'taskId',
+                'Required parameter "taskId" was null or undefined when calling addCategoryToTask().'
+            );
+        }
+
+        if (requestParameters['categoryId'] == null) {
+            throw new runtime.RequiredError(
+                'categoryId',
+                'Required parameter "categoryId" was null or undefined when calling addCategoryToTask().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/tasks/{task_id}/categories/{category_id}`.replace(`{${"task_id"}}`, encodeURIComponent(String(requestParameters['taskId']))).replace(`{${"category_id"}}`, encodeURIComponent(String(requestParameters['categoryId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TaskFromJSON(jsonValue));
+    }
+
+    /**
+     * Add a category to a task
+     */
+    async addCategoryToTask(requestParameters: AddCategoryToTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Task> {
+        const response = await this.addCategoryToTaskRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async createCategoryRaw(requestParameters: CreateCategoryOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Category>> {
+        if (requestParameters['createCategoryRequest'] == null) {
+            throw new runtime.RequiredError(
+                'createCategoryRequest',
+                'Required parameter "createCategoryRequest" was null or undefined when calling createCategory().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/categories`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateCategoryRequestToJSON(requestParameters['createCategoryRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoryFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async createCategory(requestParameters: CreateCategoryOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Category> {
+        const response = await this.createCategoryRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async createTaskRaw(requestParameters: CreateTaskOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Task>> {
+        if (requestParameters['createTaskRequest'] == null) {
+            throw new runtime.RequiredError(
+                'createTaskRequest',
+                'Required parameter "createTaskRequest" was null or undefined when calling createTask().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/tasks`,
+            method: 'POST',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateTaskRequestToJSON(requestParameters['createTaskRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TaskFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async createTask(requestParameters: CreateTaskOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Task> {
+        const response = await this.createTaskRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async deleteCategoryRaw(requestParameters: DeleteCategoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['categoryId'] == null) {
+            throw new runtime.RequiredError(
+                'categoryId',
+                'Required parameter "categoryId" was null or undefined when calling deleteCategory().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/categories/{category_id}`.replace(`{${"category_id"}}`, encodeURIComponent(String(requestParameters['categoryId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async deleteCategory(requestParameters: DeleteCategoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteCategoryRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async deleteTaskRaw(requestParameters: DeleteTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<void>> {
+        if (requestParameters['taskId'] == null) {
+            throw new runtime.RequiredError(
+                'taskId',
+                'Required parameter "taskId" was null or undefined when calling deleteTask().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/tasks/{task_id}`.replace(`{${"task_id"}}`, encodeURIComponent(String(requestParameters['taskId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.VoidApiResponse(response);
+    }
+
+    /**
+     */
+    async deleteTask(requestParameters: DeleteTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<void> {
+        await this.deleteTaskRaw(requestParameters, initOverrides);
+    }
+
+    /**
+     */
+    async getCategoriesRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetCategories200Response>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/categories`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetCategories200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getCategories(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetCategories200Response> {
+        const response = await this.getCategoriesRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getCategoryRaw(requestParameters: GetCategoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Category>> {
+        if (requestParameters['categoryId'] == null) {
+            throw new runtime.RequiredError(
+                'categoryId',
+                'Required parameter "categoryId" was null or undefined when calling getCategory().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/categories/{category_id}`.replace(`{${"category_id"}}`, encodeURIComponent(String(requestParameters['categoryId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoryFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getCategory(requestParameters: GetCategoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Category> {
+        const response = await this.getCategoryRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Get player data corresponding to discord id, if player doesn\'t exist create
+     */
+    async getPlayerByDiscordIdRaw(requestParameters: GetPlayerByDiscordIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Player>> {
+        if (requestParameters['discordId'] == null) {
+            throw new runtime.RequiredError(
+                'discordId',
+                'Required parameter "discordId" was null or undefined when calling getPlayerByDiscordId().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/players/{discord_id}/discord`.replace(`{${"discord_id"}}`, encodeURIComponent(String(requestParameters['discordId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerFromJSON(jsonValue));
+    }
+
+    /**
+     * Get player data corresponding to discord id, if player doesn\'t exist create
+     */
+    async getPlayerByDiscordId(requestParameters: GetPlayerByDiscordIdRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Player> {
+        const response = await this.getPlayerByDiscordIdRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getPlayersRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetPlayers200Response>> {
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/players`,
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetPlayers200ResponseFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getPlayers(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetPlayers200Response> {
+        const response = await this.getPlayersRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async getTaskRaw(requestParameters: GetTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Task>> {
+        if (requestParameters['taskId'] == null) {
+            throw new runtime.RequiredError(
+                'taskId',
+                'Required parameter "taskId" was null or undefined when calling getTask().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/tasks/{task_id}`.replace(`{${"task_id"}}`, encodeURIComponent(String(requestParameters['taskId']))),
+            method: 'GET',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TaskFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async getTask(requestParameters: GetTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Task> {
+        const response = await this.getTaskRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
 
     /**
      */
@@ -48,6 +486,211 @@ export class DefaultApi extends runtime.BaseAPI {
      */
     async getTasks(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetTasks200Response> {
         const response = await this.getTasksRaw(initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Remove a category from a player
+     */
+    async removeCategoryFromPlayerRaw(requestParameters: RemoveCategoryFromPlayerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Player>> {
+        if (requestParameters['playerId'] == null) {
+            throw new runtime.RequiredError(
+                'playerId',
+                'Required parameter "playerId" was null or undefined when calling removeCategoryFromPlayer().'
+            );
+        }
+
+        if (requestParameters['categoryId'] == null) {
+            throw new runtime.RequiredError(
+                'categoryId',
+                'Required parameter "categoryId" was null or undefined when calling removeCategoryFromPlayer().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/players/{player_id}/categories/{category_id}`.replace(`{${"player_id"}}`, encodeURIComponent(String(requestParameters['playerId']))).replace(`{${"category_id"}}`, encodeURIComponent(String(requestParameters['categoryId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerFromJSON(jsonValue));
+    }
+
+    /**
+     * Remove a category from a player
+     */
+    async removeCategoryFromPlayer(requestParameters: RemoveCategoryFromPlayerRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Player> {
+        const response = await this.removeCategoryFromPlayerRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Remove a category from a task
+     */
+    async removeCategoryFromTaskRaw(requestParameters: RemoveCategoryFromTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Task>> {
+        if (requestParameters['taskId'] == null) {
+            throw new runtime.RequiredError(
+                'taskId',
+                'Required parameter "taskId" was null or undefined when calling removeCategoryFromTask().'
+            );
+        }
+
+        if (requestParameters['categoryId'] == null) {
+            throw new runtime.RequiredError(
+                'categoryId',
+                'Required parameter "categoryId" was null or undefined when calling removeCategoryFromTask().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        const response = await this.request({
+            path: `/tasks/{task_id}/categories/{category_id}`.replace(`{${"task_id"}}`, encodeURIComponent(String(requestParameters['taskId']))).replace(`{${"category_id"}}`, encodeURIComponent(String(requestParameters['categoryId']))),
+            method: 'DELETE',
+            headers: headerParameters,
+            query: queryParameters,
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TaskFromJSON(jsonValue));
+    }
+
+    /**
+     * Remove a category from a task
+     */
+    async removeCategoryFromTask(requestParameters: RemoveCategoryFromTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Task> {
+        const response = await this.removeCategoryFromTaskRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async updateCategoryRaw(requestParameters: UpdateCategoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Category>> {
+        if (requestParameters['categoryId'] == null) {
+            throw new runtime.RequiredError(
+                'categoryId',
+                'Required parameter "categoryId" was null or undefined when calling updateCategory().'
+            );
+        }
+
+        if (requestParameters['createCategoryRequest'] == null) {
+            throw new runtime.RequiredError(
+                'createCategoryRequest',
+                'Required parameter "createCategoryRequest" was null or undefined when calling updateCategory().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/categories/{category_id}`.replace(`{${"category_id"}}`, encodeURIComponent(String(requestParameters['categoryId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateCategoryRequestToJSON(requestParameters['createCategoryRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => CategoryFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async updateCategory(requestParameters: UpdateCategoryRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Category> {
+        const response = await this.updateCategoryRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     * Update data corresponding to player with given id
+     */
+    async updatePlayerRaw(requestParameters: UpdatePlayerOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Player>> {
+        if (requestParameters['playerId'] == null) {
+            throw new runtime.RequiredError(
+                'playerId',
+                'Required parameter "playerId" was null or undefined when calling updatePlayer().'
+            );
+        }
+
+        if (requestParameters['updatePlayerRequest'] == null) {
+            throw new runtime.RequiredError(
+                'updatePlayerRequest',
+                'Required parameter "updatePlayerRequest" was null or undefined when calling updatePlayer().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/players/{player_id}`.replace(`{${"player_id"}}`, encodeURIComponent(String(requestParameters['playerId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: UpdatePlayerRequestToJSON(requestParameters['updatePlayerRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => PlayerFromJSON(jsonValue));
+    }
+
+    /**
+     * Update data corresponding to player with given id
+     */
+    async updatePlayer(requestParameters: UpdatePlayerOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Player> {
+        const response = await this.updatePlayerRaw(requestParameters, initOverrides);
+        return await response.value();
+    }
+
+    /**
+     */
+    async updateTaskRaw(requestParameters: UpdateTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<Task>> {
+        if (requestParameters['taskId'] == null) {
+            throw new runtime.RequiredError(
+                'taskId',
+                'Required parameter "taskId" was null or undefined when calling updateTask().'
+            );
+        }
+
+        if (requestParameters['createTaskRequest'] == null) {
+            throw new runtime.RequiredError(
+                'createTaskRequest',
+                'Required parameter "createTaskRequest" was null or undefined when calling updateTask().'
+            );
+        }
+
+        const queryParameters: any = {};
+
+        const headerParameters: runtime.HTTPHeaders = {};
+
+        headerParameters['Content-Type'] = 'application/json';
+
+        const response = await this.request({
+            path: `/tasks/{task_id}`.replace(`{${"task_id"}}`, encodeURIComponent(String(requestParameters['taskId']))),
+            method: 'PUT',
+            headers: headerParameters,
+            query: queryParameters,
+            body: CreateTaskRequestToJSON(requestParameters['createTaskRequest']),
+        }, initOverrides);
+
+        return new runtime.JSONApiResponse(response, (jsonValue) => TaskFromJSON(jsonValue));
+    }
+
+    /**
+     */
+    async updateTask(requestParameters: UpdateTaskRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<Task> {
+        const response = await this.updateTaskRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

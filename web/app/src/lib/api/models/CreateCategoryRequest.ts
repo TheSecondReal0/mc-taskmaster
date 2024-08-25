@@ -16,61 +16,52 @@ import { mapValues } from '../runtime';
 /**
  * 
  * @export
- * @interface Category
+ * @interface CreateCategoryRequest
  */
-export interface Category {
+export interface CreateCategoryRequest {
     /**
      * 
      * @type {string}
-     * @memberof Category
-     */
-    id: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof Category
+     * @memberof CreateCategoryRequest
      */
     name: string;
     /**
      * 
      * @type {string}
-     * @memberof Category
+     * @memberof CreateCategoryRequest
      */
     description?: string;
 }
 
 /**
- * Check if a given object implements the Category interface.
+ * Check if a given object implements the CreateCategoryRequest interface.
  */
-export function instanceOfCategory(value: object): value is Category {
-    if (!('id' in value) || value['id'] === undefined) return false;
+export function instanceOfCreateCategoryRequest(value: object): value is CreateCategoryRequest {
     if (!('name' in value) || value['name'] === undefined) return false;
     return true;
 }
 
-export function CategoryFromJSON(json: any): Category {
-    return CategoryFromJSONTyped(json, false);
+export function CreateCategoryRequestFromJSON(json: any): CreateCategoryRequest {
+    return CreateCategoryRequestFromJSONTyped(json, false);
 }
 
-export function CategoryFromJSONTyped(json: any, ignoreDiscriminator: boolean): Category {
+export function CreateCategoryRequestFromJSONTyped(json: any, ignoreDiscriminator: boolean): CreateCategoryRequest {
     if (json == null) {
         return json;
     }
     return {
         
-        'id': json['id'],
         'name': json['name'],
         'description': json['description'] == null ? undefined : json['description'],
     };
 }
 
-export function CategoryToJSON(value?: Category | null): any {
+export function CreateCategoryRequestToJSON(value?: CreateCategoryRequest | null): any {
     if (value == null) {
         return value;
     }
     return {
         
-        'id': value['id'],
         'name': value['name'],
         'description': value['description'],
     };
