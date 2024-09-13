@@ -27,7 +27,7 @@ class Player(Base):
     score = Column(BigInteger, nullable=False, default=0)
 
     categories = relationship("Category", secondary="player_categories_xref")
-    tasks = relationship("Task", secondary="player_tasks_xref", order_by="PlayerTaskXref.time_assigned")
+    tasks = relationship("PlayerTaskXref", order_by="PlayerTaskXref.time_assigned")
 
 
 class Category(Base):

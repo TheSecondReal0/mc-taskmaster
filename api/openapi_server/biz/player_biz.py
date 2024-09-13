@@ -89,3 +89,7 @@ def remove_category_from_player(player_id, category_id) -> Player:
         db.session.commit()
     
     return map_db_player_to_player(player)
+
+def reset_player_tasks(player_id) -> Player:
+
+    return None

@@ -232,7 +232,7 @@ def reset_player_tasks(player_id):  # noqa: E501
 
     :rtype: Union[Player, Tuple[Player, int], Tuple[Player, int, Dict[str, str]]
     """
-    return 'do some magic!'
+    return player_biz.reset_player_tasks(player_id)
 
 
 def succeed_task(player_id, task_id):  # noqa: E501
