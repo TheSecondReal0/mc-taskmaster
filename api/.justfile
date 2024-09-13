@@ -1,15 +1,15 @@
 network := 'task'
 
-run:
+start:
+    just run -d
+
+run api_args="":
     # create network for api and db to live in
     if docker network ls --filter name=^{{network}}$ --format "\{\{.Name\}\}" | grep -w "{{network}}"; then \
         docker network create {{network}}; \
     fi
     just postgres
-    just api
-
-start:
-    just api -d
+    just api {{api_args}}
 
 api args="":
     docker rm -f task-api
