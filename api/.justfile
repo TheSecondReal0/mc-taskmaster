@@ -14,7 +14,7 @@ run api_args="":
 api args="":
     docker rm -f task-api
     docker build -t task-api .
-    docker run {{args}} --network {{network}} -p 1122:1122 -p 42069:1122 --name task-api task-api
+    docker run {{args}} --network {{network}} -p 1122:1122 --name task-api task-api
 
 psql:
     psql -h localhost -p 1121 -U postgres task
