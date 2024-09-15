@@ -160,7 +160,7 @@
 
 <tr>
   <!-- Task ID field is not editable -->
-  <td>{task.id}</td>
+  <!-- <td>{task.id}</td> -->
   
   <!-- Description field: switches between text input and plain text -->
   <td>

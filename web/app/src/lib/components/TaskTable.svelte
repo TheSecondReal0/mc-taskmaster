@@ -47,7 +47,7 @@
   <table>
     <thead>
       <tr>
-        <th>Task ID</th>
+        <!-- <th>Task ID</th> -->
         <th>Description</th>
         <th>Points</th>
         <th>Enabled</th>
