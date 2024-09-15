@@ -15,9 +15,9 @@
   
     async function handleCreateTask() {
       const newTask = {
-        description,
-        points,
-        enabled,
+        description: description,
+        points: points,
+        enabled: enabled,
         categories: selectedCategories // Now an array of IDs
       };
   

@@ -37,7 +37,6 @@
 
   function onCategoriesChange(newSelectedCategories: any[]){
     selectedCategories = newSelectedCategories.map(cat => cat.id);
-    console.log("UPDATED CATEGORIES", selectedCategories);
   }
 
   function confirmDelete() {

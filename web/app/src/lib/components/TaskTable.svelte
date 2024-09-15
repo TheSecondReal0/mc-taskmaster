@@ -31,18 +31,19 @@
         }
   }
 
-    // Fetch tasks when the component is mounted
-    fetchTasks();
-    fetchCategories();
-
-    function addTaskToList(newTask: any) {
+  function addTaskToList(newTask: any) {
     tasks = [...tasks, newTask];
   }
 
-    function deleteTask(taskId: string) {
-      console.log("deleting ", taskId);
-      tasks = tasks.filter(task => task.id !== taskId);
-    }
+  // Fetch tasks when the component is mounted
+  fetchCategories();
+  fetchTasks();
+
+
+  function deleteTask(taskId: string) {
+    console.log("deleting ", taskId);
+    tasks = tasks.filter(task => task.id !== taskId);
+  }
 
   </script>
   
