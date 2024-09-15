@@ -4,9 +4,8 @@
     import { DefaultApi, type GetCategories200Response } from '$lib/api';
   
       // Dummy data for the table
-      export let tasks: any = [
-      ];
-      export let categories: any = [];
+      let tasks: any = [];
+      let categories: any = [];
 
   // Function to fetch tasks from the API
   async function fetchTasks() {
@@ -14,7 +13,6 @@
         try {
             const response = await taskApi.getTasks();
             tasks = response.tasks; // Make sure you're accessing the right property
-            console.log("TASKS", tasks)
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }
@@ -25,24 +23,23 @@
         try {
             const response: GetCategories200Response = await taskApi.getCategories();
             categories = response.tasks; // Make sure you're accessing the right property
-            console.log("CATEGORIES", categories)
         } catch (error) {
             console.error('Error fetching categories:', error);
         }
   }
 
   function addTaskToList(newTask: any) {
-    tasks = [...tasks, newTask];
+    //tasks = [...tasks, newTask];
+    fetchTasks();
   }
 
   // Fetch tasks when the component is mounted
   fetchCategories();
   fetchTasks();
 
-
   function deleteTask(taskId: string) {
     console.log("deleting ", taskId);
-    tasks = tasks.filter(task => task.id !== taskId);
+    fetchTasks();
   }
 
   </script>
@@ -59,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each tasks as task}
+      {#each tasks as task (task.id)}
         <TaskRow task={task} categoriesList={categories} onDelete={deleteTask} />
       {/each}
     </tbody>

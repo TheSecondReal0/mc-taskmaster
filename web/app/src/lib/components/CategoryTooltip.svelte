@@ -89,7 +89,7 @@
 {#if isEditing}
   <!-- Display all categories with checkboxes and tooltips -->
   <div class="dropdown">
-    {#each categoriesList as category}
+    {#each categoriesList as category (category.id)}
       <label>
         <input
           type="checkbox"
