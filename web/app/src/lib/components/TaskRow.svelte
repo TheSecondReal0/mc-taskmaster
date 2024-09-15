@@ -1,27 +1,64 @@
 <script lang="ts">
-	import { DefaultApi } from '$lib/api';
+  import { CreateTaskRequestFromJSON, DefaultApi, type CreateTaskRequest, type UpdateTaskRequest } from '$lib/api';
   import CategoryTooltip from '$lib/components/CategoryTooltip.svelte'; // Adjust the path as needed
 
   export let task: any;
+  export let categoriesList: any[];
   export let onDelete: (id: string) => void;
   
   let isEditing = false; // Track if the row is in edit mode
-  let selectedCategories = task.categories.map(cat => cat.name); // Track selected categories
+  let selectedCategories = task.categories.map(cat => cat.id); // Track selected categories
+  let showDeleteConfirmation = false; // Track if the delete confirmation dialog is shown
 
-  function handleEdit() {
+  async function handleEdit() {
+    if (isEditing) {
+      const taskWithoutId = {...task}
+      delete taskWithoutId.id;
+      taskWithoutId.categories = selectedCategories;
+
+      const taskRequest: CreateTaskRequest = CreateTaskRequestFromJSON(taskWithoutId);
+      const updateTaskRequest: UpdateTaskRequest = {
+        taskId: task.id,
+        createTaskRequest: taskRequest
+      }
+
+      console.log("ATTEMPTING TO UPDATE TASK", updateTaskRequest);
+
+      try{
+        const defaultApi = new DefaultApi();
+        await defaultApi.updateTask(updateTaskRequest);
+      } catch (error) {
+        console.error('Error updating task:', error);
+      }
+    }
+
     isEditing = !isEditing; // Toggle edit mode
   }
 
-  async function handleDelete() {
+  function onCategoriesChange(newSelectedCategories: any[]){
+    selectedCategories = newSelectedCategories.map(cat => cat.id);
+    console.log("UPDATED CATEGORIES", selectedCategories);
+  }
+
+  function confirmDelete() {
+    showDeleteConfirmation = true;
+  }
+
+  function cancelDelete() {
+    showDeleteConfirmation = false;
+  }
+
+  async function proceedDelete() {
     try {
-      const defaultApi = new DefaultApi;
-      const response = await defaultApi.deleteTask({taskId: task.id}); // Replace with your API call
+      const defaultApi = new DefaultApi();
+      await defaultApi.deleteTask({ taskId: task.id }); // Replace with your API call
       onDelete(task.id); // Trigger the parent to remove the deleted task from the list
     } catch (error) {
       console.error('Error deleting task:', error);
+    } finally {
+      showDeleteConfirmation = false;
     }
   }
-
 </script>
 
 <style>
@@ -80,6 +117,46 @@
     padding: 5px;
     font-size: 0.85rem;
   }
+
+  /* Styles for the confirmation dialog */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+  }
+
+  .modal p {
+    margin-bottom: 20px;
+  }
+
+  .modal button {
+    margin: 0 10px;
+    padding: 5px 15px;
+    font-size: 0.85rem;
+  }
+
+  .modal button.confirm {
+    background-color: #dc3545;
+    color: white;
+  }
+
+  .modal button.cancel {
+    background-color: #6c757d;
+    color: white;
+  }
 </style>
 
 <tr>
@@ -115,9 +192,7 @@
   
   <!-- Categories field uses the CategoryTooltip component -->
   <td>
-    {#each task.categories as category}
-      <CategoryTooltip {category} {isEditing} bind:selectedCategories />
-    {/each}
+    <CategoryTooltip categoriesList={categoriesList} initialSelectedCategories={selectedCategories} isEditing={isEditing} onCategoriesChange={onCategoriesChange} />
   </td>
   
   <!-- Edit/Delete buttons -->
@@ -125,6 +200,16 @@
     <button class="edit" on:click={handleEdit}>
       {isEditing ? 'Save' : 'Edit'}
     </button>
-    <button class="delete" on:click={handleDelete}>Delete</button>
+    <button class="delete" on:click={confirmDelete}>Delete</button>
   </td>
 </tr>
+
+{#if showDeleteConfirmation}
+  <div class="modal-overlay">
+    <div class="modal">
+      <p>Are you sure you want to delete this task?</p>
+      <button class="confirm" on:click={proceedDelete}>Yes</button>
+      <button class="cancel" on:click={cancelDelete}>No</button>
+    </div>
+  </div>
+{/if}

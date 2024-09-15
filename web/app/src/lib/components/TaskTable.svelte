@@ -1,10 +1,12 @@
 <script lang="ts">
     import TaskRow from './TaskRow.svelte'; // Adjust the path as needed
-    import { DefaultApi } from '$lib/api';
+    import CreateTaskForm from './CreateTaskForm.svelte';
+    import { DefaultApi, type GetCategories200Response } from '$lib/api';
   
       // Dummy data for the table
       export let tasks: any = [
       ];
+      export let categories: any = [];
 
   // Function to fetch tasks from the API
   async function fetchTasks() {
@@ -12,14 +14,30 @@
         try {
             const response = await taskApi.getTasks();
             tasks = response.tasks; // Make sure you're accessing the right property
-            console.log(tasks)
+            console.log("TASKS", tasks)
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }
     }
 
+  async function fetchCategories() {
+    let taskApi: DefaultApi = new DefaultApi();
+        try {
+            const response: GetCategories200Response = await taskApi.getCategories();
+            categories = response.tasks; // Make sure you're accessing the right property
+            console.log("CATEGORIES", categories)
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+        }
+  }
+
     // Fetch tasks when the component is mounted
     fetchTasks();
+    fetchCategories();
+
+    function addTaskToList(newTask: any) {
+    tasks = [...tasks, newTask];
+  }
 
     function deleteTask(taskId: string) {
       console.log("deleting ", taskId);
@@ -41,8 +59,9 @@
     </thead>
     <tbody>
       {#each tasks as task}
-        <TaskRow task={task} onDelete={deleteTask} />
+        <TaskRow task={task} categoriesList={categories} onDelete={deleteTask} />
       {/each}
     </tbody>
   </table>
+  <CreateTaskForm {categories} onTaskCreated={addTaskToList} />
   
