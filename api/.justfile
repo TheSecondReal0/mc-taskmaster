@@ -13,7 +13,7 @@ run api_args="":
 
 api args="":
     docker rm -f task-api
-    docker build -t task-api .
+    docker build --network=host -t task-api .
     docker run {{args}} --network {{network}} -p 1122:1122 --name task-api task-api
 
 psql:
@@ -34,4 +34,4 @@ docker_network:
     docker network create task
 
 stop_container name:
-        docker rm -f {{name}}
+    docker rm -f {{name}}
